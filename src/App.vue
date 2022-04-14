@@ -1,7 +1,19 @@
 <template>
-  <div>app</div>
+  <router-view></router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const setHeight = () => {
+  const height = window.innerHeight;
+  (document.getElementById("app") as HTMLElement).style.height = height + "px";
+};
+setHeight();
 
-<style scoped lang="scss"></style>
+window.addEventListener("resize", setHeight);
+</script>
+
+<style lang="scss">
+#app {
+  width: 100%;
+}
+</style>
