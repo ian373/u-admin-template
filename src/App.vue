@@ -12,7 +12,7 @@ setHeight();
 window.addEventListener("resize", setHeight);
 </script>
 
-<style lang="scss">
+<style>
 #app {
   width: 100%;
 }

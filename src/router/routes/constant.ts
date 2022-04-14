@@ -19,7 +19,7 @@ export default [
   {
     path: "/login",
     name: "Login",
-    hidden: true,
+    hidden: true, // hidden:true 表示不显示在SideMenu里
     component: () => import("@/views/login/index.vue"),
   },
 ] as RouteRecordRaw[];

@@ -1,39 +1,31 @@
 <template>
-  <div class="layout-box">
+  <el-container class="layout-box">
+    <el-aside><SiderVue /></el-aside>
     <el-container>
-      <el-aside>Aside</el-aside>
-      <el-container>
-        <el-header>Header</el-header>
-        <el-main><router-view></router-view></el-main>
-      </el-container>
+      <el-header>Header</el-header>
+      <el-main><router-view></router-view></el-main>
     </el-container>
-  </div>
+  </el-container>
 </template>
 
 <script setup lang="ts">
-import { ElContainer } from "element-plus";
+// 使用elment-plus官方两个插件后，自动注册组件，不需要手动导入，也不需要在main.ts中注册
+import SiderVue from "./sider/index.vue";
 </script>
 
 <style scoped lang="scss">
 .layout-box {
-  width: 100%;
   height: 100%;
+  .el-aside {
+    width: 190px;
+    background-color: lightblue;
+  }
   .el-container {
-    .el-aside {
-      width: 190px;
-      // height: 100%;
-      background-color: lightblue;
+    .el-header {
+      background-color: lightpink;
     }
-    .el-container {
-      // height: 100%;
-      // width: calc(100% - 190px);
-      .el-header {
-        // height: 45px;
-        background-color: lightpink;
-      }
-      .el-main {
-        background-color: lightgray;
-      }
+    .el-main {
+      background-color: lightgray;
     }
   }
 }
