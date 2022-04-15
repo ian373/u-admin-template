@@ -14,11 +14,11 @@ const router = useRouter();
 const userStore = useUserStore();
 const clickHandle = () => {
   userStore.setToken("TOKEN");
-  localStorage.setItem("token", "TOKEN");
+  localStorage.setItem("UAdminToken", "TOKEN");
   router.push("/");
 };
 const clearToken = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("UAdminToken");
 };
 </script>
 
