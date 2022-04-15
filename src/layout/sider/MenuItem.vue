@@ -72,12 +72,12 @@ const props = defineProps({
   //顶级一级菜单的背景颜色，要和menu的背景颜色一样
   background-color: #001529;
 }
-::v-deep .deep-sub-menu {
+:deep(.deep-sub-menu) {
   //嵌套的sub-menu的背景颜色要和el-menu-item一样
   background-color: #0c2135;
 }
 .el-sub-menu {
-  ::v-deep .el-sub-menu__title {
+  :deep(.el-sub-menu__title) {
     color: #b6bcc2;
     &:hover {
       background-color: transparent;
@@ -86,7 +86,7 @@ const props = defineProps({
   }
 }
 .top-sub-menu {
-  ::v-deep > .el-sub-menu__title {
+  > :deep(.el-sub-menu__title) {
     padding-left: 8px !important;
   }
 }
