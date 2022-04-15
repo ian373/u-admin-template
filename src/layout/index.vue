@@ -17,7 +17,7 @@ import SiderVue from "./sider/index.vue";
 .layout-box {
   height: 100%;
   .el-aside {
-    width: 190px;
+    width: 200px;
     background-color: lightblue;
   }
   .el-container {

@@ -20,4 +20,11 @@ const appStore = useAppStore();
 const userStore = useUserStore();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-menu {
+  border: none;
+
+  // 当菜单出现三级的时候，x方向会增宽,menue-item最小值200
+  // overflow-x: hidden;
+}
+</style>

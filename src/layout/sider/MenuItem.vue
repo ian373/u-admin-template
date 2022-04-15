@@ -12,7 +12,7 @@
         "
       >
         <svg class="iconfont" aria-hidden="true">
-          <use :xlink:href="item.meta.icon"></use>
+          <use :xlink:href="item.children[0].meta.icon"></use>
         </svg>
         <template #title>{{ item.children[0].meta.title }}</template>
       </el-menu-item>

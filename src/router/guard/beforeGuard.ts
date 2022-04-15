@@ -4,6 +4,7 @@ import { useUserStore } from "@/store/user";
 
 export function createBeforeGuard(router: Router) {
   router.beforeEach((to, from) => {
+    // TODO:是否每次guard都会访问store?
     const userStore = useUserStore();
     // 调试
     console.log("beforeGuard: ", from.path, " => ", to.path);

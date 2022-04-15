@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { RouteRecordRaw } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -10,7 +11,7 @@ export const useUserStore = defineStore("user", {
     setToken(token: string) {
       this.token = token;
     },
-    setRoutes(routes: any[]) {
+    setRoutes(routes: RouteRecordRaw[]) {
       this.routes = routes;
     },
     setRole(role: number) {

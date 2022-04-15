@@ -4,30 +4,30 @@ import Layout from "@/layout/index.vue";
 
 export default [
   {
-    path: "/permission",
-    redirect: "/permission/page-one",
+    path: "/routeslevel2",
+    redirect: "/routeslevel2/test1",
     component: Layout,
     meta: {
-      title: "权限页面",
-      icon: "#icon-quanxianshenpi",
+      title: "二级路由",
+      icon: "#icon-codelibrary",
       roles: [0],
     },
     children: [
       {
-        path: "page-one",
-        name: "PageOne",
-        component: () => import("@/views/permission/p-page01.vue"),
+        path: "test1",
+        name: "test1",
+        component: () => import("@/views/nested/Page1.vue"),
         meta: {
-          title: "权限页面1",
+          title: "页面1",
           roles: [-1, 0],
         },
       },
       {
-        path: "page-two",
-        name: "PageTwo",
-        component: () => import("@/views/permission/p-page02.vue"),
+        path: "test2",
+        name: "test2",
+        component: () => import("@/views/nested/Page2.vue"),
         meta: {
-          title: "权限页面2",
+          title: "页面2",
           roles: [0],
         },
       },
@@ -35,36 +35,35 @@ export default [
   },
   // FIXME:如果是多级路由但第二级只有只有一项，比如A-1-a-w这种情况渲染menu时会判为是一级路由
   {
-    path: "/test",
-    redirect: "/test/page01",
+    path: "/routeslevel3",
+    redirect: "/routeslevel3/sub1",
     component: Layout,
     meta: {
       title: "三级路由",
-      icon: "#icon-info-circle-fill",
+      icon: "#icon-nested",
       roles: [0],
     },
     children: [
       {
-        path: "page01",
-        name: "Page01",
-        component: () => import("@/views/test-page/page01.vue"),
+        path: "sub1",
+        name: "sub1",
+        component: () => import("@/views/nested/Page3.vue"),
         meta: { title: "页面1" },
       },
       {
         path: "submenu",
-        redirect: "/test/submenu/page02",
-        component: () => import("@/views/test-page/Nested.vue"),
+        redirect: "/routeslevel3/submenu/sub2",
+        component: () => import("@/views/nested/Page4.vue"),
         meta: { title: "三级菜单" },
-        // component: ,
         children: [
           {
-            path: "page02",
-            component: () => import("@/views/test-page/page02.vue"),
+            path: "sub2",
+            component: () => import("@/views/nested/Page5.vue"),
             meta: { title: "页面2" },
           },
           {
-            path: "page03",
-            component: () => import("@/views/test-page/page03.vue"),
+            path: "sub3",
+            component: () => import("@/views/nested/Page6.vue"),
             meta: { title: "页面3" },
           },
         ],
