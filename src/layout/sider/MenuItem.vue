@@ -4,6 +4,7 @@
       <!-- 一级菜单,只会在第一次生效(offset=undefined) -->
       <el-menu-item
         v-if="!props.offset && item.children && item.children.length === 1"
+        :class="props.offset ? '' : 'top-menu'"
         :key="item.path"
         :index="
           item.path === '/'
@@ -30,6 +31,7 @@
           item.children &&
           item.children.length > 1 + (props.offset ? props.offset : 0)
         "
+        :class="props.offset ? 'deep-sub-menu' : 'top-sub-menu'"
         :key="item.path"
         :index="props.parent ? props.parent + '/' + item.path : item.path"
       >
@@ -64,4 +66,44 @@ const props = defineProps({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-menu-item.top-menu {
+  padding-left: 8px !important;
+  //顶级一级菜单的背景颜色，要和menu的背景颜色一样
+  background-color: #001529;
+}
+::v-deep .deep-sub-menu {
+  //嵌套的sub-menu的背景颜色要和el-menu-item一样
+  background-color: #0c2135;
+}
+.el-sub-menu {
+  ::v-deep .el-sub-menu__title {
+    color: #b6bcc2;
+    &:hover {
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+}
+.top-sub-menu {
+  ::v-deep > .el-sub-menu__title {
+    padding-left: 8px !important;
+  }
+}
+.el-menu-item {
+  color: #b6bcc2;
+  background-color: #0c2135;
+  &.is-active {
+    color: #fff;
+    background-color: #0960bd;
+  }
+  &:hover {
+    color: #fff;
+  }
+}
+.iconfont {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+</style>

@@ -23,7 +23,7 @@ const userStore = useUserStore();
 <style scoped lang="scss">
 .el-menu {
   border: none;
-
+  background-color: #001529;
   // 当菜单出现三级的时候，x方向会增宽,menue-item最小值200
   // overflow-x: hidden;
 }
