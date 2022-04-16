@@ -67,21 +67,22 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
+@import "./const.scss";
 .el-menu-item.top-menu {
   padding-left: 8px !important;
   //顶级一级菜单的背景颜色，要和menu的背景颜色一样
-  background-color: #001529;
+  background-color: $mBgColor;
 }
 :deep(.deep-sub-menu) {
   //嵌套的sub-menu的背景颜色要和el-menu-item一样
-  background-color: #0c2135;
+  background-color: $mItemBgColor;
 }
 .el-sub-menu {
   :deep(.el-sub-menu__title) {
-    color: #b6bcc2;
+    color: $mFontColorCommon;
     &:hover {
       background-color: transparent;
-      color: #fff;
+      color: $mFontColorActive;
     }
   }
 }
@@ -91,14 +92,14 @@ const props = defineProps({
   }
 }
 .el-menu-item {
-  color: #b6bcc2;
-  background-color: #0c2135;
+  color: $mFontColorCommon;
+  background-color: $mItemBgColor;
   &.is-active {
-    color: #fff;
-    background-color: #0960bd;
+    color: $mFontColorActive;
+    background-color: $mItemBgColorActive;
   }
   &:hover {
-    color: #fff;
+    color: $mFontColorActive;
   }
 }
 .iconfont {
