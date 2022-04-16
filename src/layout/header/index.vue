@@ -1,16 +1,9 @@
 <template>
-  <div>
-    <button @click="a">toggle</button>
-  </div>
+  <Row1Vue />
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from "@/store/app";
-
-const appStore = useAppStore();
-const a = () => {
-  appStore.toggleMenuCollapse();
-};
+import Row1Vue from "./row1/index.vue";
 </script>
 
 <style scoped lang="scss"></style>

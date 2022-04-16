@@ -22,7 +22,8 @@ import HeaderVue from "./header/index.vue";
   }
   .el-container {
     .el-header {
-      background-color: lightpink;
+      padding: 0;
+      height: auto;
     }
     .el-main {
       background-color: lightgray;
