@@ -22,4 +22,10 @@ export default [
     hidden: true, // hidden:true 表示不显示在SideMenu里
     component: () => import("@/views/login/index.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    hidden: true,
+    component: () => import("@/views/notFound/index.vue"),
+  },
 ] as RouteRecordRaw[];
