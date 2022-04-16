@@ -1,5 +1,5 @@
 <template>
-  <div class="logo-box">logo-box</div>
+  <div class="logo-box">logo</div>
 </template>
 
 

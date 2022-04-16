@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useAppStore = defineStore("app", {
   state: () => ({
     menuCollapse: false,
-    menuUniqueOpen:true,
+    menuUniqueOpen: true,
     // mainKey: 0,
     // mainLoading: true,
     // visitedPaths: [],
@@ -18,4 +18,9 @@ export const useAppStore = defineStore("app", {
     // showBreadcrumb: getSettingsItem("showBreadcrumb", "bool"),
     // showTagSection: getSettingsItem("showTagSection", "bool"),
   }),
+  actions: {
+    toggleMenuCollapse() {
+      this.menuCollapse = !this.menuCollapse;
+    },
+  },
 });
