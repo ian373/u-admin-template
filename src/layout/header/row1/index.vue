@@ -4,22 +4,33 @@
       <CollapserVue />
       <BreadcrumbVue />
     </div>
+    <div class="right">
+      <SettingsVue />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import CollapserVue from "./left/Collapser.vue";
 import BreadcrumbVue from "./left/Breadcrumb.vue";
+
+import SettingsVue from "./right/Settings.vue";
 </script>
 
 <style scoped lang="scss">
 .row1 {
+  display: flex;
+  justify-content: space-between;
   height: 50px; // 和sider的logo高度对齐
   border-bottom: 1px solid #e4e4e4;
-  .left {
+  .left,
+  .right {
     display: flex;
     align-items: center;
     height: 100%;
+  }
+  .right {
+    justify-content: end;
   }
 }
 </style>
