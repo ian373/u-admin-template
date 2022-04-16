@@ -13,10 +13,11 @@ import SideMenuVue from "./SideMenu.vue";
 </script>
 
 <style scoped lang="scss">
+@import "./const.scss";
 .side-box {
   height: 100%;
+  background-color: $mBgColor;
   .el-scrollbar {
-    background-color: #001529; // 这个需要和sideMenu的颜色一至
     height: calc(100% - 50px); // 减去logovue的高度
   }
 }

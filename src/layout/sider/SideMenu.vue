@@ -4,7 +4,7 @@
     class="menu-box"
     :default-active="$route.path"
     :collapse="appStore.menuCollapse"
-    :collapse-transition="false"
+    :collapse-transition="true"
     :unique-opened="appStore.menuUniqueOpen"
   >
     <MenuItemVue :menu-data="userStore.routes" />
