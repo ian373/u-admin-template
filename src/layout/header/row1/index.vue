@@ -5,6 +5,7 @@
       <BreadcrumbVue />
     </div>
     <div class="right">
+      <UserVue />
       <SettingsVue />
     </div>
   </div>
@@ -13,6 +14,7 @@
 <script setup lang="ts">
 import CollapserVue from "./left/Collapser.vue";
 import BreadcrumbVue from "./left/Breadcrumb.vue";
+import UserVue from "./right/User.vue";
 
 import SettingsVue from "./right/Settings.vue";
 </script>

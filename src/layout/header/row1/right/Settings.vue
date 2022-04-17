@@ -38,7 +38,7 @@ const clickHandle = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
+  width: 40px;
   height: 100%;
   cursor: pointer;
   &:hover {
