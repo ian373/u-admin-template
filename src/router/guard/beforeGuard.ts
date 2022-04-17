@@ -8,7 +8,7 @@ export function createBeforeGuard(router: Router) {
     // TODO:是否每次guard都会访问store?
     const userStore = useUserStore();
     // 调试
-    console.log("beforeGuard: ", from.path, " => ", to.path);
+    // console.log("beforeGuard: ", from.path, " => ", to.path);
 
     if (userStore.token) {
       if (to.path === "/login") {

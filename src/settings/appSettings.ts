@@ -1,4 +1,6 @@
-export const appSettings = {
+import { SettingsType } from "@/types/appSettings";
+
+export const appSettings: SettingsType = {
   uniqueMenueItem: true,
   siderWidth: 200,
   showLogo: true,

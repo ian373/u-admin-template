@@ -13,11 +13,15 @@
     <template v-slot:title>
       <div class="title">应用配置</div>
     </template>
-    <span>Hi, there!</span>
+    <el-scrollbar>
+      <settings-drawer-vue />
+    </el-scrollbar>
   </el-drawer>
 </template>
 
 <script setup lang="ts">
+import SettingsDrawerVue from "./SettingsDrawer.vue";
+
 import { ref } from "vue";
 
 const drawer = ref(false);
@@ -45,6 +49,10 @@ const clickHandle = () => {
     height: 20px;
   }
 }
+.el-scrollbar {
+  height: 100%;
+  padding: 0 20px;
+}
 </style>
 
 <style lang="scss">
@@ -56,6 +64,9 @@ const clickHandle = () => {
   }
   .title {
     color: #262626;
+  }
+  .el-drawer__body {
+    padding: 0;
   }
 }
 </style>
