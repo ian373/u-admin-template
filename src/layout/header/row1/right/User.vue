@@ -40,7 +40,7 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-@import "../../const.scss";
+@use "../../const.scss";
 .el-dropdown {
   // 长度auto，更具user-name长度变化
   height: 100%;
@@ -52,7 +52,7 @@
     height: 100%;
     cursor: pointer;
     &:hover {
-      background-color: $hoverBgColor;
+      background-color: const.$hoverBgColor;
     }
     .el-avatar {
       width: 30px;

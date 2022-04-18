@@ -21,14 +21,14 @@ const userStore = useUserStore();
 </script>
 
 <style lang="scss">
-@import "./const.scss";
+@use "./const.scss";
 
 // 注意，这里不能scoped，因为菜单收缩且多级的时候，会在body下创建弹出组件
 // 此样式需要覆盖到 #app 外的元素
 
 .el-menu {
   border: none;
-  background-color: $mBgColor;
+  background-color: const.$mBgColor;
   // 当菜单出现三级的时候，x方向会增宽,menue-item最小值200
   // overflow-x: hidden;
 }

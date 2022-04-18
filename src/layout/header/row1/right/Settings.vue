@@ -4,6 +4,7 @@
       <use xlink:href="#icon-setting"></use>
     </svg>
   </div>
+  <!-- 通过size属性设置el-drawer的宽度 -->
   <el-drawer
     custom-class="my-drawer"
     v-model="drawer"
@@ -32,23 +33,10 @@ const clickHandle = () => {
 </script>
 
 <style scoped lang="scss">
-@import "../../const.scss";
+@use "../../mixin.scss";
 
-.box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 100%;
-  cursor: pointer;
-  &:hover {
-    background-color: $hoverBgColor;
-  }
-  .iconfont {
-    width: 20px;
-    height: 20px;
-  }
-}
+@include mixin.box-style;
+
 .el-scrollbar {
   height: 100%;
   padding: 0 20px;

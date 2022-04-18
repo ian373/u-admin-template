@@ -25,13 +25,13 @@ const goHome = () => {
 </script>
 
 <style scoped lang="scss">
-@import "./const.scss";
+@use "./const.scss";
 .logo-box {
   width: 200px;
   height: 50px;
   display: flex;
   align-items: center;
-  background-color: $mBgColor;
+  background-color: const.$mBgColor;
   cursor: pointer;
   //动画函数和elment的动画函数不一样，不能完全拟合
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);

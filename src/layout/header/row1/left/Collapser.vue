@@ -21,21 +21,12 @@ const clickHandle = () => {
 </script>
 
 <style scoped lang="scss">
-@import "../../const.scss";
+@use "../../mixin.scss";
+
+@include mixin.box-style;
 
 .box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 100%;
-  cursor: pointer;
-  &:hover {
-    background-color: $hoverBgColor;
-  }
   .iconfont {
-    width: 20px;
-    height: 20px;
     &.expand {
       transform: rotate(180deg);
     }
