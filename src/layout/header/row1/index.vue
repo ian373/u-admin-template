@@ -5,6 +5,7 @@
       <BreadcrumbVue />
     </div>
     <div class="right">
+      <FullScreenVue />
       <UserVue />
       <SettingsVue />
     </div>
@@ -15,6 +16,7 @@
 import CollapserVue from "./left/Collapser.vue";
 import BreadcrumbVue from "./left/Breadcrumb.vue";
 import UserVue from "./right/User.vue";
+import FullScreenVue from "./right/FullScreen.vue";
 
 import SettingsVue from "./right/Settings.vue";
 </script>
