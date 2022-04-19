@@ -1,7 +1,7 @@
 <template>
   <div class="side-box">
-    <LogoVue />
-    <el-scrollbar>
+    <LogoVue v-if="appStore.settings.showLogo" />
+    <el-scrollbar :class="appStore.settings.showLogo ? '' : 'hidden-logo'">
       <SideMenuVue />
     </el-scrollbar>
   </div>
@@ -10,6 +10,10 @@
 <script setup lang="ts">
 import LogoVue from "./Logo.vue";
 import SideMenuVue from "./SideMenu.vue";
+
+import { useAppStore } from "@/store/app";
+
+const appStore = useAppStore();
 </script>
 
 <style scoped lang="scss">
@@ -19,6 +23,9 @@ import SideMenuVue from "./SideMenu.vue";
   background-color: const.$mBgColor;
   .el-scrollbar {
     height: calc(100% - 50px); // 减去logovue的高度
+    &.hidden-logo {
+      height: 100%;
+    }
   }
 }
 </style>
