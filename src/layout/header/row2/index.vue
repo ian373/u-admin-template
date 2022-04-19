@@ -3,11 +3,15 @@
     <div class="left">
       <TagSectionVue />
     </div>
+    <div class="right">
+      <TagControlVue />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import TagSectionVue from "./left/TagSection.vue";
+import TagControlVue from "./right/TagControl.vue";
 </script>
 
 <style scoped lang="scss">
