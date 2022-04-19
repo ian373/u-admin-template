@@ -60,4 +60,10 @@ const fullScreenHandle = () => {
 @use "../../mixin.scss";
 
 @include mixin.box-style;
+.box {
+  .iconfont {
+    width: 16px;
+    height: 16px;
+  }
+}
 </style>
