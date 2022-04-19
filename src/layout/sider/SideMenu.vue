@@ -5,7 +5,7 @@
     :default-active="$route.path"
     :collapse="appStore.menuCollapse"
     :collapse-transition="true"
-    :unique-opened="appStore.menuUniqueOpen"
+    :unique-opened="(appStore.settings.uniqueMenueItem as boolean)"
   >
     <MenuItemVue :menu-data="userStore.routes" />
   </el-menu>

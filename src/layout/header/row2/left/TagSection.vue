@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
+import { watch, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { TagType } from "@/types/tagBox";
@@ -74,6 +74,11 @@ const goHome = () => {
   }
   router.push("/dashboard");
 };
+
+// 当标签栏被设为隐藏时，清空所有tag
+onBeforeUnmount(() => {
+  tagBoxStore.delAllTags();
+});
 </script>
 
 <style scoped lang="scss">

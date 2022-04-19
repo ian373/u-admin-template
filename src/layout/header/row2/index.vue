@@ -1,7 +1,7 @@
 <template>
   <div class="row2">
     <div class="left">
-      <TagSectionVue />
+      <TagSectionVue v-if="appStore.settings.showTagSection" />
     </div>
     <div class="right">
       <ReloadMainVue />
@@ -16,6 +16,10 @@ import TagSectionVue from "./left/TagSection.vue";
 import TagControlVue from "./right/TagControl.vue";
 import ExpandMainVue from "./right/ExpandMain.vue";
 import ReloadMainVue from "./right/ReloadMain.vue";
+
+import { useAppStore } from "@/store/app";
+
+const appStore = useAppStore();
 </script>
 
 <style scoped lang="scss">

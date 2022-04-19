@@ -2,7 +2,7 @@
   <div class="row1">
     <div class="left">
       <CollapserVue />
-      <BreadcrumbVue />
+      <BreadcrumbVue v-if="appStore.settings.showBreadcrumb" />
     </div>
     <div class="right">
       <NoticeVue />
@@ -21,6 +21,9 @@ import FullScreenVue from "./right/FullScreen.vue";
 import NoticeVue from "./right/Notice.vue";
 
 import SettingsVue from "./right/Settings.vue";
+
+import { useAppStore } from "@/store/app";
+const appStore = useAppStore();
 </script>
 
 <style scoped lang="scss">
