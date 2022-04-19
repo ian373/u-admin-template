@@ -11,7 +11,7 @@ export const useAppStore = defineStore("app", {
     // mainKey: 0,
     // mainLoading: true,
     // visitedPaths: [],
-    // mainFullScreen: false,
+    expandMain: false,
     // // mobile
     // isMobile: false,
     // mobileSiderOpen: false,
@@ -42,6 +42,9 @@ export const useAppStore = defineStore("app", {
           String(appSettings[key as SettingsKeyType])
         );
       }
+    },
+    toogleExpandMain() {
+      this.expandMain = !this.expandMain;
     },
   },
 });

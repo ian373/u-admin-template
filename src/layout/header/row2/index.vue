@@ -5,6 +5,7 @@
     </div>
     <div class="right">
       <TagControlVue />
+      <ExpandMainVue />
     </div>
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script setup lang="ts">
 import TagSectionVue from "./left/TagSection.vue";
 import TagControlVue from "./right/TagControl.vue";
+import ExpandMainVue from "./right/ExpandMain.vue";
 </script>
 
 <style scoped lang="scss">
