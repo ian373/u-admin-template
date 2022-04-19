@@ -87,7 +87,13 @@ const closeOtherTags = () => {
 
 .el-dropdown {
   height: 100%;
-  @include mixin.box-style;
+  @include mixin.box-style-row2;
+  .box {
+    .iconfont {
+      width: 28px;
+      height: 28px;
+    }
+  }
 }
 .el-dropdown-menu {
   .item {

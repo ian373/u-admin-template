@@ -19,10 +19,5 @@ const appStore = useAppStore();
 <style scoped lang="scss">
 @use "../../mixin.scss";
 
-@include mixin.box-style;
-// .box {
-//   .iconfont {
-//     color: #6a6b6f;
-//   }
-// }
+@include mixin.box-style-row2;
 </style>

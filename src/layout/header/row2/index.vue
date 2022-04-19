@@ -4,6 +4,7 @@
       <TagSectionVue />
     </div>
     <div class="right">
+      <ReloadMainVue />
       <TagControlVue />
       <ExpandMainVue />
     </div>
@@ -14,6 +15,7 @@
 import TagSectionVue from "./left/TagSection.vue";
 import TagControlVue from "./right/TagControl.vue";
 import ExpandMainVue from "./right/ExpandMain.vue";
+import ReloadMainVue from "./right/ReloadMain.vue";
 </script>
 
 <style scoped lang="scss">
