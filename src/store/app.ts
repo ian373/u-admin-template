@@ -12,8 +12,8 @@ export const useAppStore = defineStore("app", {
     // mainLoading: true,
     // visitedPaths: [],
     expandMain: false,
-    // // mobile
-    // isMobile: false,
+    // 当浏览器视口宽度小于一定值时，使用mobile模式
+    isMobile: false,
     // mobileSiderOpen: false,
     // App settings  type: SettingsType  能否指定this.settings的类型？
     settings: {
@@ -45,6 +45,9 @@ export const useAppStore = defineStore("app", {
     },
     toogleExpandMain() {
       this.expandMain = !this.expandMain;
+    },
+    toggleMobile() {
+      this.isMobile = !this.isMobile;
     },
   },
 });
