@@ -1,6 +1,10 @@
 <template>
   <el-container class="layout-box">
-    <el-aside><SiderVue /></el-aside>
+    <template v-if="!appStore.isMobile">
+      <el-aside v-show="!appStore.expandMain">
+        <SiderVue />
+      </el-aside>
+    </template>
     <el-container>
       <el-header><HeaderVue /></el-header>
       <el-main><router-view></router-view></el-main>
@@ -12,6 +16,10 @@
 // 使用elment-plus官方两个插件后，自动注册组件，不需要手动导入，也不需要在main.ts中注册
 import SiderVue from "./sider/index.vue";
 import HeaderVue from "./header/index.vue";
+
+import { useAppStore } from "@/store/app";
+
+const appStore = useAppStore();
 </script>
 
 <style scoped lang="scss">

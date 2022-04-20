@@ -1,5 +1,5 @@
 <template>
-  <div class="box" @click="appStore.toogleExpandMain">
+  <div class="box" @click="appStore.toggleExpandMain">
     <svg class="iconfont" aria-hidden="true">
       <use
         :xlink:href="

@@ -43,7 +43,7 @@ export const useAppStore = defineStore("app", {
         );
       }
     },
-    toogleExpandMain() {
+    toggleExpandMain() {
       this.expandMain = !this.expandMain;
     },
     toggleMobile() {
