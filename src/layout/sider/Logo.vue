@@ -5,7 +5,7 @@
     @click="goHome"
   >
     <img src="@/assets/logo.png" alt="" />
-    <span v-if="!appStore.menuCollapse">UAdminTemp</span>
+    <span v-show="!appStore.menuCollapse">UAdminTemp</span>
   </div>
 </template>
 
