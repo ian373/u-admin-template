@@ -27,6 +27,7 @@ const goHome = () => {
 <style scoped lang="scss">
 @use "./const.scss";
 .logo-box {
+  // width不能设为100%，不然会没有transition效果
   width: 200px;
   height: 50px;
   display: flex;

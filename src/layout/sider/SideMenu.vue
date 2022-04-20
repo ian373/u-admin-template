@@ -6,6 +6,7 @@
     :collapse="appStore.menuCollapse"
     :collapse-transition="true"
     :unique-opened="(appStore.settings.uniqueMenueItem as boolean)"
+    :style="{ '--sider-open-width': appStore.settings.siderWidth + 'px' }"
   >
     <MenuItemVue :menu-data="userStore.routes" />
   </el-menu>
@@ -34,7 +35,7 @@ const userStore = useUserStore();
 }
 //菜单打开时的样式
 .el-menu:not(.el-menu--collapse) {
-  width: 200px;
+  width: var(--sider-open-width);
 }
 // 菜单折叠时的样式
 .el-menu.el-menu--collapse {
