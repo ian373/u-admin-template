@@ -36,6 +36,9 @@ window.addEventListener("resize", () => {
   setHeight();
   setMobileMode();
 });
+
+// 移除首屏加载动画
+document.getElementById("app-first-loading")?.remove();
 </script>
 
 <style>
