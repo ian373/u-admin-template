@@ -8,7 +8,8 @@ export const useAppStore = defineStore("app", {
   state: () => ({
     menuCollapse: false,
     menuUniqueOpen: true,
-    // mainKey: 0,
+    // 需要刷新router-view的时候，改变mainReloadKey
+    mainReloadKey: 0,
     // mainLoading: true,
     // visitedPaths: [],
     expandMain: false,
@@ -27,6 +28,9 @@ export const useAppStore = defineStore("app", {
   actions: {
     toggleMenuCollapse() {
       this.menuCollapse = !this.menuCollapse;
+    },
+    increaseMainKey() {
+      this.mainReloadKey++;
     },
     setSettingsItem(key: SettingsKeyType, val: boolean | number) {
       this.settings[key] = val;
