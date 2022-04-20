@@ -13,7 +13,9 @@
       <el-divider>显示设置</el-divider>
       <!-- 多个inputnum或myswitch组件，出现了外边距折叠的问题，但影响不大 -->
       <my-switch-vue v-model="showLogo">Logo</my-switch-vue>
-      <my-switch-vue v-model="showBreadcrumb">面包屑</my-switch-vue>
+      <my-switch-vue v-model="showBreadcrumb" :disabled="appStore.isMobile"
+        >面包屑</my-switch-vue
+      >
       <my-switch-vue v-model="showTageSection">标签栏</my-switch-vue>
     </div>
     <el-divider></el-divider>

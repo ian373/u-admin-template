@@ -3,7 +3,12 @@
     <div class="content">
       <slot></slot>
     </div>
-    <el-switch v-model="value" active-color="#0960bd" inactive-color="#bbb" />
+    <el-switch
+      v-model="value"
+      :disabled="props.disabled"
+      active-color="#0960bd"
+      inactive-color="#bbb"
+    />
   </div>
 </template>
 
@@ -13,6 +18,10 @@ import { computed } from "vue";
 
 const props = defineProps({
   modelValue: Boolean,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emit = defineEmits(["update:modelValue"]);
 

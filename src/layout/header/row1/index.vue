@@ -2,7 +2,9 @@
   <div class="row1">
     <div class="left">
       <CollapserVue />
-      <BreadcrumbVue v-if="appStore.settings.showBreadcrumb" />
+      <BreadcrumbVue
+        v-if="appStore.settings.showBreadcrumb && !appStore.isMobile"
+      />
     </div>
     <div class="right">
       <NoticeVue />

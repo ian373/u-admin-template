@@ -5,6 +5,7 @@
         <SiderVue />
       </el-aside>
     </template>
+    <MobileSiderVue v-else />
     <el-container>
       <el-header><HeaderVue /></el-header>
       <el-main><router-view></router-view></el-main>
@@ -16,6 +17,7 @@
 // 使用elment-plus官方两个插件后，自动注册组件，不需要手动导入，也不需要在main.ts中注册
 import SiderVue from "./sider/index.vue";
 import HeaderVue from "./header/index.vue";
+import MobileSiderVue from "./sider/mobile/index.vue";
 
 import { useAppStore } from "@/store/app";
 

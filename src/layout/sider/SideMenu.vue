@@ -1,5 +1,7 @@
 <template>
+  <!-- 普通模式下的menu -->
   <el-menu
+    v-if="!appStore.isMobile"
     router
     class="menu-box"
     :default-active="$route.path"
@@ -7,6 +9,16 @@
     :collapse-transition="true"
     :unique-opened="(appStore.settings.uniqueMenueItem as boolean)"
     :style="{ '--sider-open-width': appStore.settings.siderWidth + 'px' }"
+  >
+    <MenuItemVue :menu-data="userStore.routes" />
+  </el-menu>
+  <!-- mobile模式下的menu -->
+  <el-menu
+    v-else
+    router
+    class="mobile-menu-box"
+    :default-active="$route.path"
+    :unique-opened="(appStore.settings.uniqueMenueItem as boolean)"
   >
     <MenuItemVue :menu-data="userStore.routes" />
   </el-menu>
@@ -34,11 +46,11 @@ const userStore = useUserStore();
   // overflow-x: hidden;
 }
 //菜单打开时的样式
-.el-menu:not(.el-menu--collapse) {
+.el-menu.menu-box:not(.el-menu--collapse) {
   width: var(--sider-open-width);
 }
 // 菜单折叠时的样式
-.el-menu.el-menu--collapse {
+.el-menu.menu-box.el-menu--collapse {
   width: 56px;
   .el-tooltip__trigger {
     padding: 0;

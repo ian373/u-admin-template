@@ -20,6 +20,10 @@ const setMobileMode = () => {
   }
 };
 setMobileMode();
+// 第一次载入应用，如果时mobile状态，menuCollapse应该为true，即关闭drawerMenu
+if (appStore.isMobile) {
+  appStore.toggleMenuCollapse();
+}
 
 // 设置app的宽度
 const setHeight = () => {
