@@ -1,7 +1,7 @@
 {
   "name": "uadmin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -11,7 +11,6 @@
     "axios": "^0.26.1",
     "element-plus": "^2.1.9",
     "pinia": "^2.0.13",
-    "ts-md5": "^1.2.11",
     "vue": "^3.2.25",
     "vue-router": "4"
   },
