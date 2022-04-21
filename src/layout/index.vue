@@ -8,7 +8,7 @@
     <MobileSiderVue v-else />
     <el-container>
       <el-header><HeaderVue /></el-header>
-      <el-main>
+      <el-main v-loading="appStore.mainLoading">
         <router-view :key="appStore.mainReloadKey"></router-view>
       </el-main>
     </el-container>

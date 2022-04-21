@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     InputNumber: typeof import('./src/components/appDrawer/InputNumber.vue')['default']
+    Loading: typeof import('element-plus/es')['ElLoadingDirective']
     MySwitch: typeof import('./src/components/appDrawer/MySwitch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

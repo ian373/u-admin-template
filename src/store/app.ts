@@ -10,8 +10,9 @@ export const useAppStore = defineStore("app", {
     menuUniqueOpen: true,
     // 需要刷新router-view的时候，改变mainReloadKey
     mainReloadKey: 0,
-    // mainLoading: true,
-    // visitedPaths: [],
+    // 控制main区域的Loading动画
+    mainLoading: false,
+    visitedPaths: [] as string[],
     expandMain: false,
     // 当浏览器视口宽度小于一定值时，使用mobile模式
     isMobile: false,
@@ -28,6 +29,12 @@ export const useAppStore = defineStore("app", {
   actions: {
     toggleMenuCollapse() {
       this.menuCollapse = !this.menuCollapse;
+    },
+    toggleMainLoading() {
+      this.mainLoading = !this.mainLoading;
+    },
+    addVisitedPath(path: string) {
+      this.visitedPaths.push(path);
     },
     increaseMainKey() {
       this.mainReloadKey++;
