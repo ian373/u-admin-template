@@ -8,11 +8,16 @@
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
+import { useRoute } from "vue-router";
 
 const appStore = useAppStore();
-
+const route = useRoute();
 const clickHandle = () => {
-  appStore.increaseMainKey();
+  if (route.meta.cache) {
+    appStore.increaseMainKP();
+  } else {
+    appStore.increaseMainKey();
+  }
 };
 </script>
 

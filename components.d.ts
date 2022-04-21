@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     MySwitch: typeof import('./src/components/appDrawer/MySwitch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    RouterViewComp: typeof import('./src/components/layout/RouterViewComp.vue')['default']
   }
 }
 

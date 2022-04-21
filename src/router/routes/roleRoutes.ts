@@ -18,6 +18,7 @@ export default [
         name: "test1",
         component: () => import("@/views/nested/Page1.vue"),
         meta: {
+          cache: true, //是否缓存页面
           title: "页面1",
           roles: [-1, 0],
         },

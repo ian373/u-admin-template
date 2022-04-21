@@ -10,6 +10,8 @@ export const useAppStore = defineStore("app", {
     menuUniqueOpen: true,
     // 需要刷新router-view的时候，改变mainReloadKey
     mainReloadKey: 0,
+    // 用于keepalive组件的刷新
+    mainReloadKP: 0,
     // 控制main区域的Loading动画
     mainLoading: false,
     visitedPaths: [] as string[],
@@ -32,6 +34,9 @@ export const useAppStore = defineStore("app", {
     },
     toggleMainLoading() {
       this.mainLoading = !this.mainLoading;
+    },
+    increaseMainKP() {
+      this.mainReloadKP++;
     },
     addVisitedPath(path: string) {
       this.visitedPaths.push(path);
