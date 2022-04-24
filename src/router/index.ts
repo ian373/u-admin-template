@@ -6,6 +6,8 @@ import { setupRouterGuard } from "./guard";
 const routes = constantRoutes;
 
 const router = createRouter({
+  // 使用electron时改为hash模式
+  // history: createWebHashHistory()
   history: createWebHistory(),
   routes,
 });

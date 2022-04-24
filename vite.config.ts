@@ -9,8 +9,13 @@ import { resolve } from "path";
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const config = { base: "" };
+// vite打包时，会设置NODE_ENV='production'
 if (NODE_ENV === "production") {
+  // 如果项目不在服务的根目录下，需要配置打包路径
   config.base = "/utodo/";
+
+  // 用于electron打包，改为相对路径，等价于 base = ""
+  // config.base = "./";
 }
 
 export default defineConfig({
