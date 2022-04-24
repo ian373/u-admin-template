@@ -50,12 +50,13 @@ watch(router.currentRoute, () => {
 
 const closeTag = (tag: TagType, index: number) => {
   if (route.path === tag.path) {
+    // 如果关闭的时当前路径的标签，关闭后跳转到前一个标签
     const tagList = tagBoxStore.tagList;
     // 判断tagList是否只剩下一个
-    if (tagList.length > 1) {
-      router.push(tagList[index].path);
-    } else {
+    if (index === 0) {
       router.push("/dashboard");
+    } else {
+      router.push(tagList[index - 1].path);
     }
   }
   tagBoxStore.delTag(tag);
