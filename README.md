@@ -6,11 +6,11 @@
 
 **参考项目：** [Vben Admin](https://vvbin.cn/doc-next/)，[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
-**重点依赖：**vue3, vue-router
+**重点依赖：** vue3, vue-router
 
-**包管理工具：**pnpm
+**包管理工具：** pnpm
 
-**组件库：**Element plus
+**组件库：** Element plus
 
 # 启动项目
 

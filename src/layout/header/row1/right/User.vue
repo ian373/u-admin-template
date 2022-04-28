@@ -21,15 +21,15 @@
             <svg class="iconfont" aria-hidden="true">
               <use xlink:href="#icon-lock"></use>
             </svg>
-            <span>项目地址</span>
+            <span>锁定页面</span>
           </div>
         </el-dropdown-item>
-        <el-dropdown-item>
+        <el-dropdown-item @click="logout">
           <div class="item">
             <svg class="iconfont" aria-hidden="true">
               <use xlink:href="#icon-Logout"></use>
             </svg>
-            <span>项目地址</span>
+            <span>登出</span>
           </div>
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -37,7 +37,12 @@
   </el-dropdown>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const logout = () => {
+  localStorage.removeItem("UAdminToken");
+  location.reload();
+};
+</script>
 
 <style scoped lang="scss">
 @use "../../const.scss";
