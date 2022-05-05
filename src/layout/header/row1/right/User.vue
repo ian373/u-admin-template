@@ -8,7 +8,7 @@
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>
+        <el-dropdown-item @click="goProject">
           <div class="item">
             <svg class="iconfont" aria-hidden="true">
               <use xlink:href="#icon-document"></use>
@@ -38,9 +38,15 @@
 </template>
 
 <script setup lang="ts">
+const goProject = () => {
+  window.open("https://gitee.com/ian171/u-admin-template");
+};
+
 const logout = () => {
-  localStorage.removeItem("UAdminToken");
-  location.reload();
+  if (confirm("是否登出？")) {
+    localStorage.removeItem("UAdminToken");
+    location.reload();
+  }
 };
 </script>
 
