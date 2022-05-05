@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-// 使用elment-plus官方两个插件后，自动注册组件，不需要手动导入，也不需要在main.ts中注册
+// 使用自动导入插件后，直接在template中用，不用导入也不用在main.ts中注册
 import SiderVue from "./sider/index.vue";
 import HeaderVue from "./header/index.vue";
 import MobileSiderVue from "./sider/mobile/index.vue";

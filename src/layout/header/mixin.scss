@@ -1,6 +1,7 @@
 @use "./const.scss";
 
 // box-style-row1
+// header -> row1 各控件的通用样式
 @mixin box-style {
   .box {
     display: flex;
@@ -20,6 +21,7 @@
   }
 }
 
+// row2各控件的通用样式
 @mixin box-style-row2 {
   .box {
     display: flex;
