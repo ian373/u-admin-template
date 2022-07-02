@@ -27,25 +27,27 @@ const goHome = () => {
 <style scoped lang="scss">
 @use "./const.scss";
 .logo-box {
-  // width不能设为100%，不然会没有transition效果
+  // width不能设为100%或auto，不然transition效果异常
+  // 宽度设为最小侧边栏宽度200px
   width: 200px;
   height: 50px;
   display: flex;
   align-items: center;
   background-color: const.$mBgColor;
   cursor: pointer;
+  overflow: hidden;
   //动画函数和elment的动画函数不一样，不能完全拟合
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
   padding-left: 12px;
   img {
     width: 30px;
     height: 30px;
+    margin-right: 10px;
   }
   span {
     padding-left: 5px;
     transition: all 0.3s ease;
-    overflow: hidden;
     color: #fff;
     font-size: 16px;
     font-weight: 700;

@@ -12,10 +12,14 @@
             : item.path + '/' + item.children[0].path
         "
       >
-        <svg class="iconfont" aria-hidden="true">
-          <use :xlink:href="item.children[0].meta.icon"></use>
-        </svg>
-        <template #title>{{ item.children[0].meta.title }}</template>
+        <div>
+          <svg class="iconfont" aria-hidden="true">
+            <use :xlink:href="item.children[0].meta.icon"></use>
+          </svg>
+        </div>
+        <template #title>
+          <div>{{ item.children[0].meta.title }}</div>
+        </template>
       </el-menu-item>
       <!-- 多级菜单的最后一级菜单 -->
       <el-menu-item
@@ -37,9 +41,12 @@
       >
         <template #title>
           <!-- 只在顶级菜单处才显示图表 -->
-          <svg v-if="props.shhowIcon" class="iconfont" aria-hidden="true">
-            <use :xlink:href="item.meta.icon"></use>
-          </svg>
+          <div>
+            <!-- svg图标要用div包裹，否则菜单栏折叠动画会出现跳动 -->
+            <svg v-if="props.shhowIcon" class="iconfont" aria-hidden="true">
+              <use :xlink:href="item.meta.icon"></use>
+            </svg>
+          </div>
           <span>{{ item.meta.title }}</span>
         </template>
         <MenuItem
@@ -55,6 +62,7 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
+
 const props = defineProps({
   shhowIcon: {
     type: Boolean,
@@ -68,32 +76,16 @@ const props = defineProps({
 
 <style scoped lang="scss">
 @use "./const.scss";
-.el-menu-item.top-menu {
-  padding-left: 8px !important;
-  //顶级一级菜单的背景颜色，要和menu的背景颜色一样
-  background-color: const.$mBgColor;
-}
-:deep(.deep-sub-menu) {
-  //嵌套的sub-menu的背景颜色要和el-menu-item一样
-  background-color: const.$mItemBgColor;
-}
-.el-sub-menu {
-  :deep(.el-sub-menu__title) {
-    color: const.$mFontColorCommon;
-    &:hover {
-      background-color: transparent;
-      color: const.$mFontColorActive;
-    }
-  }
-}
-.top-sub-menu {
-  > :deep(.el-sub-menu__title) {
-    padding-left: 8px !important;
-  }
-}
 .el-menu-item {
   color: const.$mFontColorCommon;
   background-color: const.$mItemBgColor;
+  &.top-menu {
+    padding-right: 0;
+    padding-left: const.$iconRight !important;
+    //顶级一级菜单的背景颜色，要和menu的背景颜色一样
+    background-color: const.$mBgColor;
+  }
+  // &.is-active 要在 &.top-menu的后面，同等权重，层叠原理
   &.is-active {
     color: const.$mFontColorActive;
     background-color: const.$mItemBgColorActive;
@@ -102,9 +94,27 @@ const props = defineProps({
     color: const.$mFontColorActive;
   }
 }
+
+.el-sub-menu {
+  background-color: const.$mItemBgColor;
+  &.top-sub-menu {
+    background-color: const.$mBgColor;
+    > :deep(.el-sub-menu__title) {
+      padding-left: const.$iconRight !important;
+    }
+  }
+  > :deep(.el-sub-menu__title) {
+    color: const.$mFontColorCommon;
+    &:hover {
+      background-color: transparent;
+      color: const.$mFontColorActive;
+    }
+  }
+}
+
 .iconfont {
   width: 20px;
   height: 20px;
-  margin-right: 5px;
+  margin-right: 15px;
 }
 </style>

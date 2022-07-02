@@ -39,23 +39,28 @@ const userStore = useUserStore();
 // 注意，这里不能scoped，因为菜单收缩且多级的时候，会在body下创建弹出组件
 // 此样式需要覆盖到 #app 外的元素
 
+// bddy .el-popper-container-xxx .el-menu中的 el-popper-container-xxx会有1px的白色
+// border，不知道如何用选择器去除
 .el-menu {
   border: none;
   background-color: const.$mBgColor;
+  // #app外的弹窗：el-menu--popup会用一个padding:1;
+  padding: 0;
   // 当菜单出现三级的时候，x方向会增宽,menue-item最小值200
   // overflow-x: hidden;
-}
-//菜单打开时的样式
-.el-menu.menu-box:not(.el-menu--collapse) {
-  width: var(--sider-open-width);
-}
-// 菜单折叠时的样式
-.el-menu.menu-box.el-menu--collapse {
-  width: 56px;
-  .el-tooltip__trigger {
-    padding: 0;
-    padding-left: 0 !important;
-    justify-content: center;
+  //菜单打开时的样式
+  &.menu-box:not(.el-menu--collapse) {
+    width: var(--sider-open-width);
+  }
+  // 菜单折叠时的样式
+  &.menu-box.el-menu--collapse {
+    // 折叠时菜单栏的宽度
+    width: 56px;
+    .el-tooltip__trigger {
+      padding: 0 !important;
+      // 菜单栏折叠的时候图标的padding-left
+      padding-left: const.$iconRight !important;
+    }
   }
 }
 </style>
