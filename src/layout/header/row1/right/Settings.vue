@@ -11,7 +11,7 @@
     title="应用配置"
     :size="330"
   >
-    <template v-slot:title>
+    <template #header>
       <div class="title">应用配置</div>
     </template>
     <el-scrollbar>
