@@ -43,6 +43,7 @@ const appStore = useAppStore();
       position: relative;
       background-color: #f0f2f5;
       padding: 0;
+      overflow: hidden;
     }
   }
 }
