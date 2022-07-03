@@ -1,6 +1,6 @@
 <template>
   <div class="demo-collapse">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <el-collapse-item title="Consistency" name="1">
         <div>
           Consistent with real life: in line with the process and logic of real
@@ -53,9 +53,6 @@
 import { ref } from "vue";
 
 const activeNames = ref(["1"]);
-const handleChange = (val: string[]) => {
-  console.log(val);
-};
 </script>
 
 <style scoped lang="scss">

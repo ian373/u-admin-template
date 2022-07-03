@@ -1,39 +1,160 @@
 <template>
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item v-for="name of breadcrumbList" :key="name"
-      >{{ name }}
+    <el-breadcrumb-item v-for="item of breadcrumbList" :key="item.path">
+      <el-dropdown v-if="item.haveSiblings">
+        <span class="el-dropdown-link">
+          {{ item.title }}
+          <span>
+            <svg class="iconfont" aria-hidden="true">
+              <use xlink:href="#icon-expand-more"></use>
+            </svg>
+          </span>
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item
+              v-for="_item of item.siblings"
+              :key="'dropdown' + _item.path"
+              @click="dropdownHandle(_item.path)"
+              >{{ _item.title }}</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+      <div class="item-title" v-else>{{ item.title }}</div>
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { RouteRecordRaw, useRoute, useRouter } from "vue-router";
 import { computed, ref, watch, Ref } from "vue";
+import { useUserStore } from "@/store/user";
 
 const route = useRoute();
+const router = useRouter();
 const currentPath = computed(() => route.path);
-const breadcrumbList = ref([]) as Ref<string[]>;
 
+const userStore = useUserStore();
+
+type ParseRoutesType = { path: string; title?: string; children?: any };
+type BreadCrumbType = {
+  path: string;
+  title: string;
+  haveSiblings: boolean;
+  siblings?: ParseRoutesType[];
+};
+
+const breadcrumbList = ref([]) as Ref<BreadCrumbType[]>;
+
+function parseRoutes(routeList: RouteRecordRaw[], parentPath: null | string) {
+  const pathList = [] as any[];
+
+  for (const route of routeList) {
+    // @ts-ignore
+    if (route.hidden) continue;
+    const obj = {} as ParseRoutesType;
+    if (parentPath) {
+      if (parentPath === "/") {
+        obj.path = parentPath + route.path;
+      } else {
+        obj.path = parentPath + "/" + route.path;
+      }
+    } else {
+      obj.path = route.path;
+    }
+    if (route.meta && route.meta.title) obj.title = route.meta.title as string;
+    if (route.children) {
+      obj.children = parseRoutes(route.children, obj.path);
+    }
+    pathList.push(obj);
+  }
+  return pathList;
+}
+// console.log(parseRoutes(userStore.routes, null));
+// 返回pathList中最后一个路径的兄弟路径对象
+function getSiblingRoutes(pathList: string[], list: ParseRoutesType[]) {
+  const getCh = (path: string, objList: ParseRoutesType[]) => {
+    let obj;
+    objList.forEach((item) => {
+      if (item.path === path) {
+        obj = item;
+        return;
+      }
+    });
+    return obj as unknown as ParseRoutesType;
+  };
+  let target;
+  let curList = list;
+  for (const p of pathList.slice(0, -1)) {
+    target = getCh(p, curList);
+    curList = target.children;
+  }
+  // console.log(curList);
+  return curList;
+}
+const routePathList = parseRoutes(userStore.routes, null);
 // matched顺序：父路-->由外到内-->当前路由
 const setBreadcrumb = () => {
-  const titleList: string[] = [];
-  for (let x of route.matched) {
-    if (x.meta.title) {
-      if (x.meta.title === "Dashboard") {
-        titleList.push("首页");
-      } else {
-        titleList.push(x.meta.title as string);
-      }
+  // BUG:判断诸如dashboard的一级顶级路由
+  let list = [] as BreadCrumbType[];
+
+  const pathList = route.matched.map((item) => item.path);
+
+  route.matched.forEach((item, idx) => {
+    if (idx === 0) {
+      if (item.meta.title)
+        list.push({
+          path: item.path,
+          haveSiblings: false,
+          title: item.meta.title as string,
+        });
     }
-  }
-  breadcrumbList.value = titleList;
+    if (item.meta.title && idx > 0) {
+      const siblings = getSiblingRoutes(
+        pathList.slice(0, idx + 1),
+        routePathList
+      );
+      let obj: BreadCrumbType = {
+        path: item.path,
+        title: item.meta.title as string,
+        haveSiblings: siblings.length > 1 ? true : false,
+      };
+      if (siblings.length > 1) {
+        obj.siblings = siblings;
+      }
+      list.push(obj);
+    }
+  });
+  // console.log(list);
+  breadcrumbList.value = list;
 };
 setBreadcrumb();
 watch(currentPath, setBreadcrumb);
+
+const dropdownHandle = (path: string) => {
+  if (router.currentRoute.value.path !== path) {
+    router.push(path);
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .el-breadcrumb {
+  height: 100%;
   margin-left: 8px;
+  > :deep(.el-breadcrumb__item) {
+    height: 100%;
+  }
+  // TODO:普通的面包屑item和下拉菜单的item对不齐，而且hover失效了
+  .item-title {
+    height: 20px;
+    line-height: 20px;
+  }
+  .iconfont {
+    width: 20px;
+    height: 20px;
+    color: #8c8c8c;
+  }
 }
 </style>

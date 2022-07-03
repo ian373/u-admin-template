@@ -3,7 +3,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    routes: [] as any[],
+    routes: [] as RouteRecordRaw[],
     role: -1,
     token: "",
   }),
