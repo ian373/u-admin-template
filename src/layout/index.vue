@@ -41,7 +41,8 @@ const appStore = useAppStore();
     }
     .el-main {
       position: relative;
-      background-color: lightgray;
+      background-color: #f0f2f5;
+      padding: 0;
     }
   }
 }

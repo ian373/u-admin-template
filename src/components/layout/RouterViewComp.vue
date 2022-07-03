@@ -26,21 +26,20 @@ const appStore = useAppStore();
 }
 
 .fade-enter-active {
-  position: absolute;
-  transition: all 0.3s ease-out 0.3s;
+  transition: transform 0.3s ease-out 0.3s, opacity 0.3s ease-out 0.3s;
 }
 .fade-enter-to {
   transform: translate(0);
   opacity: 1;
 }
 .fade-leave-from {
-  opacity: 0.5;
+  opacity: 1;
 }
 .fade-leave-active {
-  position: absolute;
-  transition: all 0.3s ease-in;
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
 }
 .fade-leave-to {
+  opacity: 0;
   transform: translate(20px);
 }
 </style>
