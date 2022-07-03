@@ -146,10 +146,15 @@ const dropdownHandle = (path: string) => {
   > :deep(.el-breadcrumb__item) {
     height: 100%;
   }
-  // TODO:普通的面包屑item和下拉菜单的item对不齐，而且hover失效了
   .item-title {
     height: 20px;
     line-height: 20px;
+  }
+  .el-dropdown-link {
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   .iconfont {
     width: 20px;
