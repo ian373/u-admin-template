@@ -96,13 +96,14 @@ function getSiblingRoutes(pathList: string[], list: ParseRoutesType[]) {
 const routePathList = parseRoutes(userStore.routes, null);
 // matched顺序：父路-->由外到内-->当前路由
 const setBreadcrumb = () => {
-  // BUG:判断诸如dashboard的一级顶级路由
   let list = [] as BreadCrumbType[];
 
   const pathList = route.matched.map((item) => item.path);
 
   route.matched.forEach((item, idx) => {
     if (idx === 0) {
+      // 通过判断是否有item.meta.title来判断是否要添加入list
+      // 对路由编写格式要求限定大
       if (item.meta.title)
         list.push({
           path: item.path,

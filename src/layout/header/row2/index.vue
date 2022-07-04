@@ -35,7 +35,8 @@ const appStore = useAppStore();
     height: 100%;
   }
   .left {
-    width: 70%; //TODO: 宽度：100% - div.right的宽度 - 滚动条margin-left
+    //宽度：100% - div.right的宽度
+    width: calc(100% - 122px);
   }
   .right {
     justify-content: end;

@@ -88,11 +88,14 @@ onBeforeUnmount(() => {
   cursor: pointer;
 }
 .el-scrollbar {
-  //TODO: 滚动条如何往下移一点，太靠上了，影响点击tag
   width: 100%;
   margin-left: 8px;
   :deep(.el-scrollbar__view) {
     height: 100%;
+  }
+  :deep(.el-scrollbar__thumb) {
+    // 把滚动条的位置下移2px，滚动条的父容器似乎设置了overflow:hidden,再往下移就要看不到了
+    margin-top: 2px;
   }
   .tag-box {
     height: 100%;

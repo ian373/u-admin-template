@@ -15,7 +15,7 @@
       </el-badge>
     </template>
     <el-tabs v-model="activeName">
-      <el-tab-pane label="消息(3)" name="message">
+      <el-tab-pane class="t" label="消息(3)" name="message">
         <div class="content-box">
           <div class="item" v-for="x of 3">
             <!-- 如果要显示消息较复杂，可自行设计 div.item -->
@@ -51,6 +51,12 @@ const hiddenBadge = ref(false);
   }
 }
 .el-tabs {
+  // 如果el-tabs的某一个el-panel的内容高度非常大，可以限制最大高度，如下面的.t
+  // 还可以使用el-scroll包裹一下，这样就不用使用overfow:auto了
+  .t {
+    max-height: 900px;
+    overflow: auto;
+  }
   :deep(.el-tabs__nav) {
     display: flex;
     justify-content: space-between;
@@ -62,7 +68,6 @@ const hiddenBadge = ref(false);
       width: 48px !important;
     }
   }
-  // TODO: 需要优化，比如滚动条，定高等等
   .content-box {
     $border-color: #f0f0f0;
     border: 1px solid $border-color;
