@@ -1,6 +1,6 @@
 <template>
-  <el-scrollbar>
-    <div class="tag-box">
+  <el-scrollbar ref="scrollbarRef">
+    <div class="tag-box" ref="tagBoxRef">
       <el-tag
         class="dashboard-tag"
         @click="goHome"
@@ -22,16 +22,21 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onBeforeUnmount } from "vue";
+import { watch, onBeforeUnmount, ref, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { TagType } from "@/types/tagBox";
 import { useTagBoxStore } from "@/store/tagBox";
+import { ElScrollbar } from "element-plus";
+
+const tagBoxRef = ref();
 
 const tagBoxStore = useTagBoxStore();
 
 const router = useRouter();
 const route = useRoute();
+
+const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
 
 // 如果第一次加载的时候不是/dashboard页面，需要添加到tagList
 if (route.path !== "/dashboard") {
@@ -41,11 +46,39 @@ if (route.path !== "/dashboard") {
   });
 }
 
+// const scroll = ({ scrollLeft }) => {
+//   console.log(`scrollLeft:${scrollLeft}`);
+// };
+
+function getMoveLength() {
+  const lastEl = tagBoxRef.value.children[tagBoxRef.value.children.length - 1];
+  const elOffsetLeft = lastEl.offsetLeft;
+  const elWidth = window.getComputedStyle(lastEl).width;
+  const elParentWidth = window.getComputedStyle(tagBoxRef.value).width;
+
+  return parseFloat(elWidth) - (parseFloat(elParentWidth) - elOffsetLeft);
+  // console.log("offsetLeft: ", lastEl.offsetLeft);
+  // console.log('width: ',lastEl.getBoundingClientRect().width) //返回0
+
+  // console.log(window.getComputedStyle(tagBoxRef.value).width);
+  // console.log("width: ", window.getComputedStyle(lastEl).width);
+}
 watch(router.currentRoute, () => {
-  tagBoxStore.addTag({
+  const isAddNewTag = tagBoxStore.addTag({
     name: route.meta.title as string,
     path: route.path,
   });
+  if (isAddNewTag) {
+    nextTick(() => {
+      const _length = getMoveLength();
+      if (_length > 0) {
+        // console.log("move scroll");
+        // console.log(_length);
+        // BUG: 添加新tag超出容器，移动滚动条不准确，仍会有bug，但不知道问题所在
+        scrollbarRef.value!.setScrollLeft(_length);
+      }
+    });
+  }
 });
 
 const closeTag = (tag: TagType, index: number) => {

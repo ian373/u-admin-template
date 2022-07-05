@@ -64,7 +64,9 @@ function parseRoutes(routeList: RouteRecordRaw[], parentPath: null | string) {
       obj.path = route.path;
     }
     if (route.meta && route.meta.title) obj.title = route.meta.title as string;
-    if (route.children) {
+    // @ts-ignore
+    if (route.children as any) {
+      // @ts-ignore
       obj.children = parseRoutes(route.children, obj.path);
     }
     pathList.push(obj);

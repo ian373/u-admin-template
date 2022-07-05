@@ -28,7 +28,9 @@ export function filterAsyncRoutes(asyncRoutes: RouteRecordRaw[], role: number) {
     //防止原route对象被修改
     const temp = { ...route };
     if (hasPermission(temp, role)) {
+      // @ts-ignore
       if (temp.children) {
+        // @ts-ignore
         temp.children = filterAsyncRoutes(temp.children, role);
       }
       res.push(temp);

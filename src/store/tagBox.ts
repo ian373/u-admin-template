@@ -10,12 +10,13 @@ export const useTagBoxStore = defineStore("tagBox", {
   actions: {
     addTag(view: TagType) {
       if (view.path === "/dashboard") {
-        return;
+        return false;
       }
       if (this.tagList.some((tag) => tag.path === view.path)) {
-        return;
+        return false;
       }
       this.tagList.push(view);
+      return true;
     },
 
     delTag(view: TagType) {
