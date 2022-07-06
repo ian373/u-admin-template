@@ -34,7 +34,6 @@ export default [
       },
     ],
   },
-  // FIXME:如果是多级路由但第二级只有只有一项，比如A-1-a-w这种情况渲染menu时会判为是一级路由
   {
     path: "/routeslevel3",
     redirect: "/routeslevel3/sub1",

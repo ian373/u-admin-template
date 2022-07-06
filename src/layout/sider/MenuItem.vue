@@ -3,7 +3,12 @@
     <template v-if="!item.hidden">
       <!-- 一级菜单,只会在第一次生效(offset=undefined) -->
       <el-menu-item
-        v-if="!props.offset && item.children && item.children.length === 1"
+        v-if="
+          !props.offset &&
+          item.children &&
+          item.children.length === 1 &&
+          !item.children[0].children
+        "
         :class="props.offset ? '' : 'top-menu'"
         :key="item.path"
         :index="
@@ -31,10 +36,7 @@
       </el-menu-item>
       <!-- 多级菜单 -->
       <el-sub-menu
-        v-if="
-          item.children &&
-          item.children.length > 1 + (props.offset ? props.offset : 0)
-        "
+        v-if="isSubmenu(item, props.offset)"
         :class="props.offset ? 'deep-sub-menu' : 'top-sub-menu'"
         :key="item.path"
         :index="props.parent ? props.parent + '/' + item.path : item.path"
@@ -72,6 +74,23 @@ const props = defineProps({
   menuData: Object as PropType<any[]>,
   parent: String,
 });
+
+// offset=> undfined | -1
+const isSubmenu = (item: any, offset: any) => {
+  if (!offset) {
+    if (item.children && item.children.length > 1) return true;
+    // 解决路由为s1-s2-s3-s4这种边际情况
+    if (
+      item.children &&
+      item.children.length === 1 &&
+      item.children[0].children
+    )
+      return true;
+  } else {
+    if (item.children && item.children.length > 0) return true;
+  }
+  return false;
+};
 </script>
 
 <style scoped lang="scss">

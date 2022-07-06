@@ -6,7 +6,7 @@ import { permissionHandle } from "@/utils/routes/permission";
 
 export function createBeforeGuard(router: Router) {
   router.beforeEach(async (to, _from) => {
-    // TODO:是否每次guard都会访问store?
+    // 是否每次guard都要访问store?
     const userStore = useUserStore();
     const appStore = useAppStore();
     // 调试
