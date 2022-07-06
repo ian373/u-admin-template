@@ -74,7 +74,7 @@ watch(router.currentRoute, () => {
       if (_length > 0) {
         // console.log("move scroll");
         // console.log(_length);
-        // BUG: 添加新tag超出容器，移动滚动条不准确，仍会有bug，但不知道问题所在
+        // BUG: 添加新tag超出容器，移动滚动条不会自动出现，或滚动不准确，可能是element-plus的问题
         scrollbarRef.value!.setScrollLeft(_length);
       }
     });
