@@ -43,6 +43,10 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/user";
 import { setUserRoutes } from "@/utils/routes/permission";
 
+import { request } from "@/utils/request";
+import { UserApi } from "@/api/user";
+import { setToken } from "@/utils/user";
+
 const loginFormRef = ref<FormInstance>();
 
 const loginData = reactive({
@@ -89,25 +93,27 @@ const login = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       // 发动用户名和密码，获取token和role
-      // ...
-      userStore.setToken("UAdminTemp TOKEN");
-      localStorage.setItem("UAdminToken", "UAdminTemp TOKEN");
-      userStore.setRole(0);
-      setUserRoutes(0);
-
-      ElMessage({
-        showClose: true,
-        message: "登录成功！",
-        type: "success",
-      });
-
-      router.push("/dashboard");
+      request
+        .post(UserApi.login, {
+          userName: loginData.userName,
+          pwd: loginData.pwd,
+          remberMe: loginData.rememberMe,
+        })
+        .then((res: any) => {
+          userStore.setToken(res.token);
+          setToken(res.token);
+          userStore.setRole(res.role);
+          setUserRoutes(res.role);
+          ElMessage({
+            showClose: true,
+            message: "登录成功！",
+            type: "success",
+          });
+          router.push("/dashboard");
+        })
+        .catch(() => {});
     } else {
-      ElMessage({
-        showClose: true,
-        message: "登录失败！",
-        type: "error",
-      });
+      ElMessage({ showClose: true, message: "请完成表单!", type: "error" });
     }
   });
 };

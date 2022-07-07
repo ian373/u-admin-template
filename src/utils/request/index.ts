@@ -1,34 +1,28 @@
-import Request from "./request";
+import RequestSuper from "./request";
 
 import { ElMessage } from "element-plus";
 
-const _request = new Request({
+const Request = new RequestSuper({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 1000 * 60 * 5,
   interceptors: {
-    requestInterceptors: (config) => {
-      // Token函数实现，能不能只调用一次getToken()?
-      const token = getToken();
-      if (token) {
-        config.headers["authorization"] = token;
-      }
-      return config;
-    },
-
     requestInterceptorsCatch: (err) => {
       console.log(err);
       return Promise.reject(err);
     },
     responseInterceptorsCatch: (err) => {
-      const res = err.data;
+      // console.log(err);
+      const res = err.response.data;
       ElMessage({
         showClose: true,
-        message: res.data.msg,
+        message: res.msg,
         type: "error",
       });
       return Promise.reject(err);
     },
   },
-});
+}); // 可能有需要导出Request的情况
 
-export default _request.instance;
+const request = Request.instance;
+
+export { request };

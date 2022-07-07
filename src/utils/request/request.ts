@@ -4,7 +4,7 @@ import type { AxiosInstance } from "axios";
 
 import type { RequestConfig, RequestInterceptors } from "@/types/request";
 
-class Requset {
+class RequsetSuper {
   instance: AxiosInstance;
   interceptorsObj?: RequestInterceptors;
 
@@ -37,4 +37,4 @@ class Requset {
   }
 }
 
-export default Requset;
+export default RequsetSuper;

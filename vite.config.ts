@@ -43,9 +43,9 @@ export default defineConfig({
     port: 8000,
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:4523/mock/602861",
+        target: "http://127.0.0.1:4523/m1/1250186-0-default",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/utodo/, ""),
+        rewrite: (path) => path.replace(/^\/api/, ""),
         // ws: true,
       },
     },
