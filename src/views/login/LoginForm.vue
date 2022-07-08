@@ -92,7 +92,9 @@ const login = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      // 发动用户名和密码，获取token和role
+      // console.log(request.defaults.headers);  (A)
+
+      // 发送用户名和密码，获取token和role
       request
         .post(UserApi.login, {
           userName: loginData.userName,
@@ -100,6 +102,11 @@ const login = (formEl: FormInstance | undefined) => {
           remberMe: loginData.rememberMe,
         })
         .then((res: any) => {
+          // 更新token，在@/utils/routes/permission中设置过一次
+          (request.defaults.headers as any).authorization =
+            "Bearer " + res.token;
+          // console.log(request.defaults.headers); 这里的打印结果和(A)处的打印结果相同(新token)，不懂原因
+          // 当然，此次post请求的authorization还是permissin.ts中设置的token
           userStore.setToken(res.token);
           setToken(res.token);
           userStore.setRole(res.role);

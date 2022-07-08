@@ -26,9 +26,8 @@ export async function permissionHandle() {
   const token = getToken();
   if (token) {
     try {
-      const res = (await request.get(UserApi.getUserInfo, {
-        headers: { authorization: token },
-      })) as any;
+      (request.defaults.headers as any).authorization = token;
+      const res = (await request.get(UserApi.getUserInfo)) as any;
       userStore.setRole(res.role);
       userStore.setToken(token);
       setUserRoutes(res.role);
