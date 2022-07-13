@@ -26,6 +26,17 @@ export async function permissionHandle() {
   const token = getToken();
   if (token) {
     try {
+      // ============no-request: on=========
+      if (
+        process.env.NODE_ENV === "development" &&
+        import.meta.env.VITE_NO_REQUEST === "on"
+      ) {
+        userStore.setRole(0);
+        userStore.setToken(token);
+        setUserRoutes(0);
+        return true;
+      }
+      // ======================
       (request.defaults.headers as any).authorization = token;
       const res = (await request.get(UserApi.getUserInfo)) as any;
       userStore.setRole(res.role);

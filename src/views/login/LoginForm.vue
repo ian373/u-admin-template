@@ -92,33 +92,53 @@ const login = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      // console.log(request.defaults.headers);  (A)
+      // ===============no-request: on================
+      if (
+        process.env.NODE_ENV === "development" &&
+        import.meta.env.VITE_NO_REQUEST === "on"
+      ) {
+        console.log("NO_REQUEST: ON");
+        const token = "UAdminTempToken";
+        userStore.setToken(token);
+        setToken(token);
+        userStore.setRole(0);
+        setUserRoutes(0);
+        ElMessage({
+          showClose: true,
+          message: "登录成功！",
+          type: "success",
+        });
+        router.push("/dashboard");
+      } // =======================================
+      else {
+        // console.log(request.defaults.headers);  (A)
 
-      // 发送用户名和密码，获取token和role
-      request
-        .post(UserApi.login, {
-          userName: loginData.userName,
-          pwd: loginData.pwd,
-          remberMe: loginData.rememberMe,
-        })
-        .then((res: any) => {
-          // 更新token，在@/utils/routes/permission中设置过一次
-          (request.defaults.headers as any).authorization =
-            "Bearer " + res.token;
-          // console.log(request.defaults.headers); 这里的打印结果和(A)处的打印结果相同(新token)，不懂原因
-          // 当然，此次post请求的authorization还是permissin.ts中设置的token
-          userStore.setToken(res.token);
-          setToken(res.token);
-          userStore.setRole(res.role);
-          setUserRoutes(res.role);
-          ElMessage({
-            showClose: true,
-            message: "登录成功！",
-            type: "success",
-          });
-          router.push("/dashboard");
-        })
-        .catch(() => {});
+        // 发送用户名和密码，获取token和role
+        request
+          .post(UserApi.login, {
+            userName: loginData.userName,
+            pwd: loginData.pwd,
+            remberMe: loginData.rememberMe,
+          })
+          .then((res: any) => {
+            // 更新token，在@/utils/routes/permission中设置过一次
+            (request.defaults.headers as any).authorization =
+              "Bearer " + res.token;
+            // console.log(request.defaults.headers); 这里的打印结果和(A)处的打印结果相同(新token)，不懂原因
+            // 当然，此次post请求的authorization还是permissin.ts中设置的token
+            userStore.setToken(res.token);
+            setToken(res.token);
+            userStore.setRole(res.role);
+            setUserRoutes(res.role);
+            ElMessage({
+              showClose: true,
+              message: "登录成功！",
+              type: "success",
+            });
+            router.push("/dashboard");
+          })
+          .catch(() => {});
+      }
     } else {
       ElMessage({ showClose: true, message: "请完成表单!", type: "error" });
     }
