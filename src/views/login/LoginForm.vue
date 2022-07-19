@@ -93,10 +93,7 @@ const login = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       // ===============no-request: on================
-      if (
-        process.env.NODE_ENV === "development" &&
-        import.meta.env.VITE_NO_REQUEST === "on"
-      ) {
+      if (import.meta.env.VITE_NO_REQUEST === "on") {
         console.log("NO_REQUEST: ON");
         const token = "UAdminTempToken";
         userStore.setToken(token);

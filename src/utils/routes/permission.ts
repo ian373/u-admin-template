@@ -27,10 +27,7 @@ export async function permissionHandle() {
   if (token) {
     try {
       // ============no-request: on=========
-      if (
-        process.env.NODE_ENV === "development" &&
-        import.meta.env.VITE_NO_REQUEST === "on"
-      ) {
+      if (import.meta.env.VITE_NO_REQUEST === "on") {
         userStore.setRole(0);
         userStore.setToken(token);
         setUserRoutes(0);
