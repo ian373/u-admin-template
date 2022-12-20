@@ -57,7 +57,8 @@ const activeNames = ref(["1"]);
 
 <style scoped lang="scss">
 .demo-collapse {
-  padding: 0 10px;
+  width: 100%;
+  padding: 10px;
   margin-top: 20px;
 }
 </style>

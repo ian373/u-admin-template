@@ -26,6 +26,8 @@ const appStore = useAppStore();
 }
 
 .fade-enter-active {
+  // 需要在该组件的父容器上设置position: relative;
+  position: absolute;
   // BUG:不管使用下面的方法还是注释的方法，首次切换要加载的组件都会有闪动现象
   // 延迟0.3秒，等上一个元素执行完动画后再执行
   transition: transform 0.3s ease-out 0.3s, opacity 0.3s ease-out 0.3s;
@@ -41,6 +43,7 @@ const appStore = useAppStore();
   opacity: 1;
 }
 .fade-leave-active {
+  position: absolute;
   transition: transform 0.3s ease-in, opacity 0.3s ease-in;
 }
 .fade-leave-to {
