@@ -1,7 +1,7 @@
 <template>
   <el-drawer
     ref="drawerRef"
-    custom-class="my-drawer"
+    class="my-drawer"
     direction="ltr"
     v-model="showMenu"
     title="菜单栏"
@@ -41,5 +41,3 @@ watch(
   }
 );
 </script>
-
-<style scoped lang="scss"></style>

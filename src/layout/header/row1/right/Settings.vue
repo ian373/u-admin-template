@@ -5,12 +5,7 @@
     </svg>
   </div>
   <!-- 通过size属性设置el-drawer的宽度 -->
-  <el-drawer
-    custom-class="my-drawer"
-    v-model="drawer"
-    title="应用配置"
-    :size="330"
-  >
+  <el-drawer class="my-drawer" v-model="drawer" title="应用配置" :size="330">
     <template #header>
       <div class="title">应用配置</div>
     </template>

@@ -26,13 +26,18 @@ const appStore = useAppStore();
 }
 
 .fade-enter-active {
+  // BUG:不管使用下面的方法还是注释的方法，首次切换要加载的组件都会有闪动现象
+  // 延迟0.3秒，等上一个元素执行完动画后再执行
   transition: transform 0.3s ease-out 0.3s, opacity 0.3s ease-out 0.3s;
+  // 可以使用<transition name="fade" mode="out-in">然后上面就不需要设置延迟了
+  // 但是实际使用发现会出现闪动，还是暂用这种方法
 }
 .fade-enter-to {
   transform: translate(0);
   opacity: 1;
 }
 .fade-leave-from {
+  transform: translate(0);
   opacity: 1;
 }
 .fade-leave-active {
