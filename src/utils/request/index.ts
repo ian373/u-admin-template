@@ -2,7 +2,7 @@ import RequestSuper from "./request";
 
 import { ElMessage } from "element-plus";
 
-const isDev = process.env.NODE_ENV === "production" ? false : true;
+const isDev = process.env.NODE_ENV !== "production";
 
 const Request = new RequestSuper({
   baseURL: import.meta.env.VITE_API_BASE_URL,
