@@ -1,13 +1,11 @@
 <template>
-  <div class="box" @click="appStore.toggleExpandMain">
-    <svg class="iconfont" aria-hidden="true">
-      <use
-        :xlink:href="
-          appStore.expandMain ? '#icon-full-screen-off' : '#icon-full-screen'
-        "
-      ></use>
-    </svg>
-  </div>
+    <div class="box" @click="appStore.toggleExpandMain">
+        <svg class="iconfont" aria-hidden="true">
+            <use
+                :xlink:href="appStore.expandMain ? '#icon-full-screen-off' : '#icon-full-screen'"
+            ></use>
+        </svg>
+    </div>
 </template>
 
 <script setup lang="ts">

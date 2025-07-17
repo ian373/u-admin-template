@@ -1,4 +1,4 @@
 export const UserApi = {
-  login: "/login",
-  getUserInfo: "/user/info",
+    login: "/login",
+    getUserInfo: "/user/info",
 };

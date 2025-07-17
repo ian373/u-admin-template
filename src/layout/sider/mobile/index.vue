@@ -1,15 +1,15 @@
 <template>
-  <el-drawer
-    ref="drawerRef"
-    class="my-drawer"
-    direction="ltr"
-    v-model="showMenu"
-    title="菜单栏"
-    :with-header="false"
-    :size="(appStore.settings.siderWidth as number)"
-  >
-    <SiderVue />
-  </el-drawer>
+    <el-drawer
+        ref="drawerRef"
+        class="my-drawer"
+        direction="ltr"
+        v-model="showMenu"
+        title="菜单栏"
+        :with-header="false"
+        :size="appStore.settings.siderWidth as number"
+    >
+        <SiderVue />
+    </el-drawer>
 </template>
 
 <script setup lang="ts">
@@ -25,19 +25,19 @@ const drawerRef = ref(null);
 
 const appStore = useAppStore();
 const showMenu = computed({
-  get: () => !appStore.menuCollapse,
-  set: () => {
-    appStore.toggleMenuCollapse();
-  },
+    get: () => !appStore.menuCollapse,
+    set: () => {
+        appStore.toggleMenuCollapse();
+    },
 });
 
 const route = useRoute();
 watch(
-  () => route.path,
-  () => {
-    // @ts-ignore
-    drawerRef.value.handleClose();
-    // 用于关闭 Drawer, 该方法会调用传入的 before-close 方法(为空)
-  }
+    () => route.path,
+    () => {
+        // @ts-ignore
+        drawerRef.value.handleClose();
+        // 用于关闭 Drawer, 该方法会调用传入的 before-close 方法(为空)
+    },
 );
 </script>

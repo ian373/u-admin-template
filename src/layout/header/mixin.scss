@@ -3,41 +3,41 @@
 // box-style-row1
 // header -> row1 各控件的通用样式
 @mixin box-style {
-  .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 100%;
-    color: #262626;
-    cursor: pointer;
-    &:hover {
-      background-color: const.$hoverBgColor;
+    .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 100%;
+        color: #262626;
+        cursor: pointer;
+        &:hover {
+            background-color: const.$hoverBgColor;
+        }
+        .iconfont {
+            width: 20px;
+            height: 20px;
+        }
     }
-    .iconfont {
-      width: 20px;
-      height: 20px;
-    }
-  }
 }
 
 // row2各控件的通用样式
 @mixin box-style-row2 {
-  .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 100%;
-    cursor: pointer;
-    color: #8c8c8c;
-    border-left: 1px solid #d9d9d9;
-    &:hover {
-      background-color: const.$hoverBgColor;
+    .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 100%;
+        cursor: pointer;
+        color: #8c8c8c;
+        border-left: 1px solid #d9d9d9;
+        &:hover {
+            background-color: const.$hoverBgColor;
+        }
+        .iconfont {
+            width: 16px;
+            height: 16px;
+        }
     }
-    .iconfont {
-      width: 16px;
-      height: 16px;
-    }
-  }
 }

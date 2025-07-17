@@ -1,13 +1,9 @@
 <template>
-  <div class="box" @click="clickHandle">
-    <svg
-      class="iconfont"
-      :class="appStore.menuCollapse ? '' : 'expand'"
-      aria-hidden="true"
-    >
-      <use xlink:href="#icon-expand1"></use>
-    </svg>
-  </div>
+    <div class="box" @click="clickHandle">
+        <svg class="iconfont" :class="appStore.menuCollapse ? '' : 'expand'" aria-hidden="true">
+            <use xlink:href="#icon-expand1"></use>
+        </svg>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +12,7 @@ import { useAppStore } from "@/store/app";
 const appStore = useAppStore();
 
 const clickHandle = () => {
-  appStore.toggleMenuCollapse();
+    appStore.toggleMenuCollapse();
 };
 </script>
 
@@ -26,10 +22,10 @@ const clickHandle = () => {
 @include mixin.box-style;
 
 .box {
-  .iconfont {
-    &.expand {
-      transform: rotate(180deg);
+    .iconfont {
+        &.expand {
+            transform: rotate(180deg);
+        }
     }
-  }
 }
 </style>

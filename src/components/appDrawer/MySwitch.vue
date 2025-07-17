@@ -1,15 +1,15 @@
 <template>
-  <div class="item">
-    <div class="content">
-      <slot></slot>
+    <div class="item">
+        <div class="content">
+            <slot></slot>
+        </div>
+        <el-switch
+            v-model="value"
+            :disabled="props.disabled"
+            active-color="#0960bd"
+            inactive-color="#bbb"
+        />
     </div>
-    <el-switch
-      v-model="value"
-      :disabled="props.disabled"
-      active-color="#0960bd"
-      inactive-color="#bbb"
-    />
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -17,27 +17,27 @@
 import { computed } from "vue";
 
 const props = defineProps({
-  modelValue: Boolean,
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+    modelValue: Boolean,
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 const emit = defineEmits(["update:modelValue"]);
 
 const value = computed({
-  get: () => props.modelValue,
-  set: (val) => {
-    emit("update:modelValue", val);
-  },
+    get: () => props.modelValue,
+    set: (val) => {
+        emit("update:modelValue", val);
+    },
 });
 </script>
 
 <style scoped lang="scss">
 .item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0;
 }
 </style>

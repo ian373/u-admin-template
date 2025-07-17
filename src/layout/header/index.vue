@@ -1,6 +1,6 @@
 <template>
-  <Row1Vue v-show="!appStore.expandMain" />
-  <Row2Vue />
+    <Row1Vue v-show="!appStore.expandMain" />
+    <Row2Vue />
 </template>
 
 <script setup lang="ts">

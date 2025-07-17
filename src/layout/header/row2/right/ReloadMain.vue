@@ -1,9 +1,9 @@
 <template>
-  <div class="box" @click="clickHandle">
-    <svg class="iconfont" aria-hidden="true">
-      <use xlink:href="#icon-reload"></use>
-    </svg>
-  </div>
+    <div class="box" @click="clickHandle">
+        <svg class="iconfont" aria-hidden="true">
+            <use xlink:href="#icon-reload"></use>
+        </svg>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -13,11 +13,11 @@ import { useRoute } from "vue-router";
 const appStore = useAppStore();
 const route = useRoute();
 const clickHandle = () => {
-  if (route.meta.cache) {
-    appStore.increaseMainKP();
-  } else {
-    appStore.increaseMainKey();
-  }
+    if (route.meta.cache) {
+        appStore.increaseMainKP();
+    } else {
+        appStore.increaseMainKey();
+    }
 };
 </script>
 
