@@ -1,10 +1,7 @@
 <template>
     <div class="box" @click="fullScreenHandle">
-        <svg class="iconfont" aria-hidden="true">
-            <use
-                :xlink:href="fullScreen ? '#icon-fullscreen-expand-filling' : '#icon-expand'"
-            ></use>
-        </svg>
+        <MaterialSymbolsFullscreenExit v-if="fullScreen" class="icon" />
+        <MaterialSymbolsFullscreen v-else class="icon" />
     </div>
 </template>
 
@@ -14,6 +11,8 @@ import { ref } from "vue";
 
 import { ElMessage } from "element-plus";
 import "element-plus/es/components/message/style/css";
+import MaterialSymbolsFullscreen from "~icons/material-symbols/fullscreen";
+import MaterialSymbolsFullscreenExit from "~icons/material-symbols/fullscreen-exit";
 
 const fullScreen = ref(false);
 
@@ -59,7 +58,7 @@ const fullScreenHandle = () => {
 
 @include mixin.box-style;
 .box {
-    .iconfont {
+    .icon {
         width: 16px;
         height: 16px;
     }

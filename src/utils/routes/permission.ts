@@ -4,7 +4,7 @@ import { filterAsyncRoutes } from "@/utils/routes/parseRoutes";
 import roleRoutes from "@/router/routes/roleRoutes";
 import constRoutes from "@/router/routes/constRoutes";
 
-import { request } from "@/utils/request/index";
+import { request } from "@/utils/request";
 import { UserApi } from "@/api/user";
 import { getToken, removeToken } from "@/utils/user";
 

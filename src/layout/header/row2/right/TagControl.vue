@@ -1,41 +1,31 @@
 <template>
     <el-dropdown trigger="click">
         <div class="box">
-            <svg class="iconfont" aria-hidden="true">
-                <use xlink:href="#icon-expand-more"></use>
-            </svg>
+            <MaterialSymbolsKeyboardArrowDownRounded class="icon" />
         </div>
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item>
                     <div class="item" @click="closeLeftTags">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-a-leftto-line"></use>
-                        </svg>
+                        <MaterialSymbolsTextSelectJumpToBeginning class="icon" />
                         <span>关闭左侧标签</span>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item>
                     <div class="item" @click="closeRightTags">
-                        <svg class="iconfont" style="transform: rotate(180deg)" aria-hidden="true">
-                            <use xlink:href="#icon-a-leftto-line"></use>
-                        </svg>
+                        <MaterialSymbolsTextSelectJumpToEndRounded class="icon" />
                         <span>关闭右侧标签</span>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item>
                     <div class="item" @click="closeOtherTags">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-house"></use>
-                        </svg>
+                        <MaterialSymbolsViewArrayOutline class="icon" />
                         <span>关闭其它标签</span>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
                     <div class="item" @click="closeAllTags">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-minus-bold"></use>
-                        </svg>
+                        <MaterialSymbolsDataArrayRounded class="icon" />
                         <span>关闭全部标签</span>
                     </div>
                 </el-dropdown-item>
@@ -48,6 +38,12 @@
 import { useRoute } from "vue-router";
 import { useTagBoxStore } from "@/store/tagBox";
 import router from "@/router";
+
+import MaterialSymbolsKeyboardArrowDownRounded from "~icons/material-symbols/keyboard-arrow-down-rounded";
+import MaterialSymbolsTextSelectJumpToBeginning from "~icons/material-symbols/text-select-jump-to-beginning";
+import MaterialSymbolsTextSelectJumpToEndRounded from "~icons/material-symbols/text-select-jump-to-end-rounded";
+import MaterialSymbolsDataArrayRounded from "~icons/material-symbols/data-array-rounded";
+import MaterialSymbolsViewArrayOutline from "~icons/material-symbols/view-array-outline";
 
 const route = useRoute();
 const tagBoxStore = useTagBoxStore();
@@ -84,18 +80,21 @@ const closeOtherTags = () => {
 .el-dropdown {
     height: 100%;
     @include mixin.box-style-row2;
+
     .box {
-        .iconfont {
+        .icon {
             width: 28px;
             height: 28px;
         }
     }
 }
+
 .el-dropdown-menu {
     .item {
         display: flex;
         align-items: center;
-        .iconfont {
+
+        .icon {
             width: 18px;
             height: 18px;
             margin-right: 5px;

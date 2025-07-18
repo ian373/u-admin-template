@@ -1,14 +1,13 @@
 <template>
     <div class="box" @click="clickHandle">
-        <svg class="iconfont" aria-hidden="true">
-            <use xlink:href="#icon-reload"></use>
-        </svg>
+        <MaterialSymbolsAutorenew class="icon" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
 import { useRoute } from "vue-router";
+import MaterialSymbolsAutorenew from "~icons/material-symbols/autorenew";
 
 const appStore = useAppStore();
 const route = useRoute();

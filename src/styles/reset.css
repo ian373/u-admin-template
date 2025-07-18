@@ -87,6 +87,7 @@ video {
     vertical-align: baseline;
     box-sizing: border-box;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -101,17 +102,21 @@ nav,
 section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
+
 ol,
 ul {
     list-style: none;
 }
+
 blockquote,
 q {
     quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -119,15 +124,20 @@ q:after {
     content: "";
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-.iconfont {
-    width: 30px;
-    height: 30px;
+.icon {
+    /*
+    💡 SVG Authoring Tips:
+    To make your icons color adaptable, set fill="currentColor" or stroke="currentColor" in your SVG.
+    Leave the height and width unspecified, we will set them for you.
+     */
+    width: 32px;
+    height: 32px;
     vertical-align: middle;
     fill: currentColor;
-    overflow: hidden;
 }

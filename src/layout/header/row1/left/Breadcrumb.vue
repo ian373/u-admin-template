@@ -5,9 +5,7 @@
                 <span class="el-dropdown-link">
                     {{ item.title }}
                     <span>
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-expand-more"></use>
-                        </svg>
+                        <MaterialSymbolsKeyboardArrowDownRounded class="icon" />
                     </span>
                 </span>
                 <template #dropdown>
@@ -30,6 +28,8 @@
 import { type RouteRecordRaw, useRoute, useRouter } from "vue-router";
 import { computed, ref, watch, type Ref } from "vue";
 import { useUserStore } from "@/store/user";
+
+import MaterialSymbolsKeyboardArrowDownRounded from "~icons/material-symbols/keyboard-arrow-down-rounded";
 
 const route = useRoute();
 const router = useRouter();
@@ -162,7 +162,7 @@ const dropdownHandle = (path: string) => {
         align-items: center;
     }
 
-    .iconfont {
+    .icon {
         width: 20px;
         height: 20px;
         color: #8c8c8c;
