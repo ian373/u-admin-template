@@ -1,6 +1,7 @@
 import LayoutVue from "@/layout/index.vue";
-
 import { type RouteRecordRaw } from "vue-router";
+
+import MaterialSymbolsSpaceDashboard from "~icons/material-symbols/space-dashboard";
 
 export default [
     {
@@ -12,7 +13,7 @@ export default [
                 path: "dashboard",
                 name: "Dashboard",
                 component: () => import("@/views/dashboard/index.vue"),
-                meta: { title: "Dashboard", icon: "#icon-dashboard" },
+                meta: { title: "Dashboard", icon: MaterialSymbolsSpaceDashboard },
             },
         ],
     },

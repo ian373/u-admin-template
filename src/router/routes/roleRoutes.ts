@@ -1,6 +1,7 @@
 import { type RouteRecordRaw } from "vue-router";
-
 import Layout from "@/layout/index.vue";
+import MaterialSymbolsCodeBlocks from "~icons/material-symbols/code-blocks";
+import MaterialSymbolsNestFoundSavingsSharp from "~icons/material-symbols/nest-found-savings-sharp";
 
 export default [
     {
@@ -9,7 +10,7 @@ export default [
         component: Layout,
         meta: {
             title: "二级路由",
-            icon: "#icon-codelibrary",
+            icon: MaterialSymbolsCodeBlocks,
             roles: [0],
         },
         children: [
@@ -40,7 +41,7 @@ export default [
         component: Layout,
         meta: {
             title: "三级路由",
-            icon: "#icon-nested",
+            icon: MaterialSymbolsNestFoundSavingsSharp,
             roles: [0],
         },
         children: [

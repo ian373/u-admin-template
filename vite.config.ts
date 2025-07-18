@@ -6,6 +6,7 @@ import vueDevTools from "vite-plugin-vue-devtools";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import Icons from "unplugin-icons/vite";
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const config = { base: "./" };
@@ -21,7 +22,8 @@ if (NODE_ENV === "production") {
 export default defineConfig({
     plugins: [
         vue(),
-        vueDevTools(),
+        vueDevTools({ launchEditor: "webstorm" }),
+        Icons({ autoInstall: true }),
         AutoImport({
             resolvers: [ElementPlusResolver()],
         }),

@@ -1,15 +1,14 @@
 <template>
     <div class="box" @click="appStore.toggleExpandMain">
-        <svg class="iconfont" aria-hidden="true">
-            <use
-                :xlink:href="appStore.expandMain ? '#icon-full-screen-off' : '#icon-full-screen'"
-            ></use>
-        </svg>
+        <MaterialSymbolsCloseFullscreen v-if="appStore.expandMain" class="icon" />
+        <MaterialSymbolsOpenInFull v-else class="icon" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
+import MaterialSymbolsOpenInFull from "~icons/material-symbols/open-in-full";
+import MaterialSymbolsCloseFullscreen from "~icons/material-symbols/close-fullscreen";
 
 const appStore = useAppStore();
 </script>

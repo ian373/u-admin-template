@@ -1,13 +1,15 @@
 <template>
     <div class="box" @click="clickHandle">
-        <svg class="iconfont" :class="appStore.menuCollapse ? '' : 'expand'" aria-hidden="true">
-            <use xlink:href="#icon-expand1"></use>
-        </svg>
+        <MaterialSymbolsMenuOpenRounded
+            class="icon"
+            :class="appStore.menuCollapse ? 'expand' : ''"
+        />
     </div>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
+import MaterialSymbolsMenuOpenRounded from "~icons/material-symbols/menu-open-rounded";
 
 const appStore = useAppStore();
 
@@ -22,7 +24,7 @@ const clickHandle = () => {
 @include mixin.box-style;
 
 .box {
-    .iconfont {
+    .icon {
         &.expand {
             transform: rotate(180deg);
         }

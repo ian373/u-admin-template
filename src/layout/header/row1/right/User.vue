@@ -8,25 +8,19 @@
             <el-dropdown-menu>
                 <el-dropdown-item @click="goProject">
                     <div class="item">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-document"></use>
-                        </svg>
+                        <MaterialSymbolsLabProfileOutline class="icon" />
                         <span>项目地址</span>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
                     <div class="item">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-lock"></use>
-                        </svg>
+                        <MaterialSymbolsLockOutline class="icon" />
                         <span>锁定页面</span>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item @click="logout">
                     <div class="item">
-                        <svg class="iconfont" aria-hidden="true">
-                            <use xlink:href="#icon-Logout"></use>
-                        </svg>
+                        <MaterialSymbolsLogoutRounded class="icon" />
                         <span>登出</span>
                     </div>
                 </el-dropdown-item>
@@ -36,6 +30,10 @@
 </template>
 
 <script setup lang="ts">
+import MaterialSymbolsLabProfileOutline from "~icons/material-symbols/lab-profile-outline";
+import MaterialSymbolsLockOutline from "~icons/material-symbols/lock-outline";
+import MaterialSymbolsLogoutRounded from "~icons/material-symbols/logout-rounded";
+
 const goProject = () => {
     window.open("https://gitee.com/ian171/u-admin-template");
 };
@@ -50,9 +48,11 @@ const logout = () => {
 
 <style scoped lang="scss">
 @use "../../const.scss";
+
 .el-dropdown {
     // 长度auto，更具user-name长度变化
     height: 100%;
+
     .avatar {
         display: flex;
         align-items: center;
@@ -60,13 +60,16 @@ const logout = () => {
         padding: 0 10px;
         height: 100%;
         cursor: pointer;
+
         &:hover {
             background-color: const.$hoverBgColor;
         }
+
         .el-avatar {
             width: 30px;
             height: 30px;
         }
+
         .user-name {
             margin-left: 10px;
         }
@@ -77,7 +80,8 @@ const logout = () => {
     .item {
         display: flex;
         align-items: center;
-        .iconfont {
+
+        .icon {
             width: 18px;
             height: 18px;
             margin-right: 5px;

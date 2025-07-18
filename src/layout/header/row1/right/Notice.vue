@@ -9,9 +9,7 @@
                 :hidden="hiddenBadge"
                 :is-dot="true"
             >
-                <svg class="iconfont" aria-hidden="true">
-                    <use xlink:href="#icon-bell"></use>
-                </svg>
+                <MaterialSymbolsAddAlertOutline class="icon" />
             </el-badge>
         </template>
         <el-tabs v-model="activeName">
@@ -32,6 +30,7 @@
 
 <script setup lang="ts">
 import { ref, Ref } from "vue";
+import MaterialSymbolsAddAlertOutline from "~icons/material-symbols/add-alert-outline";
 
 const activeName = ref("message") as Ref<"message" | "notice" | "task">;
 
@@ -50,6 +49,7 @@ const hiddenBadge = ref(false);
         top: 10px;
     }
 }
+
 .el-tabs {
     // 如果el-tabs的某一个el-panel的内容高度非常大，可以限制最大高度，如下面的.t
     // 还可以使用el-scroll包裹一下，这样就不用使用overfow:auto了
@@ -57,27 +57,33 @@ const hiddenBadge = ref(false);
         max-height: 900px;
         overflow: auto;
     }
+
     :deep(.el-tabs__nav) {
         display: flex;
         justify-content: space-between;
         width: 100%;
+
         .el-tabs__item {
             padding: 0;
         }
+
         .el-tabs__active-bar {
             width: 48px !important;
         }
     }
+
     .content-box {
         $border-color: #f0f0f0;
         border: 1px solid $border-color;
         padding: 0 10px;
+
         .item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 40px;
             border-bottom: 1px solid $border-color;
+
             &:last-child {
                 border-bottom: none;
             }

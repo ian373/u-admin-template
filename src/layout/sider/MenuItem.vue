@@ -14,9 +14,7 @@
                 :index="item.path === '/' ? '/dashboard' : item.path + '/' + item.children[0].path"
             >
                 <div>
-                    <svg class="iconfont" aria-hidden="true">
-                        <use :xlink:href="item.children[0].meta.icon"></use>
-                    </svg>
+                    <component :is="item.children[0].meta.icon" class="icon" />
                 </div>
                 <template #title>
                     <div>{{ item.children[0].meta.title }}</div>
@@ -40,10 +38,7 @@
                 <template #title>
                     <!-- 只在顶级菜单处才显示图表 -->
                     <div>
-                        <!-- svg图标要用div包裹，否则菜单栏折叠动画会出现跳动 -->
-                        <svg v-if="props.shhowIcon" class="iconfont" aria-hidden="true">
-                            <use :xlink:href="item.meta.icon"></use>
-                        </svg>
+                        <component v-if="props.shhowIcon" :is="item.meta.icon" class="icon" />
                     </div>
                     <span>{{ item.meta.title }}</span>
                 </template>
@@ -130,7 +125,7 @@ const isSubmenu = (item: any, offset: any) => {
     }
 }
 
-.iconfont {
+.icon {
     width: 20px;
     height: 20px;
     margin-right: 15px;
