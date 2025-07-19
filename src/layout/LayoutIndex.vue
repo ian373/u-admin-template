@@ -2,12 +2,12 @@
     <el-container class="layout-box">
         <template v-if="!appStore.isMobile">
             <el-aside v-show="!appStore.expandMain">
-                <SiderVue />
+                <SiderIndexVue />
             </el-aside>
         </template>
-        <MobileSiderVue v-else />
+        <MobileIndexSiderVue v-else />
         <el-container>
-            <el-header><HeaderVue /></el-header>
+            <el-header><HeaderIndexVue /></el-header>
             <el-main v-loading="appStore.mainLoading">
                 <RouterViewCompVue />
             </el-main>
@@ -17,9 +17,9 @@
 
 <script setup lang="ts">
 // 使用自动导入插件后，直接在template中用，不用导入也不用在main.ts中注册
-import SiderVue from "./sider/index.vue";
-import HeaderVue from "./header/index.vue";
-import MobileSiderVue from "./sider/mobile/index.vue";
+import SiderIndexVue from "./sider/SiderIndex.vue";
+import HeaderIndexVue from "./header/HeaderIndex.vue";
+import MobileIndexSiderVue from "./sider/mobile/MobileIndex.vue";
 
 import RouterViewCompVue from "@/components/layout/RouterViewComp.vue";
 

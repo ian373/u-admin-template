@@ -1,6 +1,6 @@
 <template>
     <div class="side-box">
-        <LogoVue v-if="appStore.settings.showLogo" />
+        <AppLogoVue v-if="appStore.settings.showLogo" />
         <el-scrollbar :class="appStore.settings.showLogo ? '' : 'hidden-logo'">
             <SideMenuVue />
         </el-scrollbar>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import LogoVue from "./Logo.vue";
+import AppLogoVue from "./AppLogo.vue";
 import SideMenuVue from "./SideMenu.vue";
 
 import { useAppStore } from "@/store/app";
