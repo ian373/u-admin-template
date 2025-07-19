@@ -8,7 +8,7 @@
         :with-header="false"
         :size="appStore.settings.siderWidth as number"
     >
-        <SiderVue />
+        <SiderIndexVue />
     </el-drawer>
 </template>
 
@@ -16,7 +16,7 @@
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import SiderVue from "../index.vue";
+import SiderIndexVue from "../SiderIndex.vue";
 
 import { useAppStore } from "@/store/app";
 

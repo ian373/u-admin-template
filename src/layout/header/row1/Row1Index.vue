@@ -1,26 +1,26 @@
 <template>
     <div class="row1">
         <div class="left">
-            <CollapserVue />
-            <BreadcrumbVue v-if="appStore.settings.showBreadcrumb && !appStore.isMobile" />
+            <LeftCollapserVue />
+            <LeftBreadcrumbVue v-if="appStore.settings.showBreadcrumb && !appStore.isMobile" />
         </div>
         <div class="right">
-            <NoticeVue />
+            <RightNoticeVue />
             <FullScreenVue />
-            <UserVue />
-            <SettingsVue />
+            <RightUserVue />
+            <RightSettingsVue />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import CollapserVue from "./left/Collapser.vue";
-import BreadcrumbVue from "./left/Breadcrumb.vue";
-import UserVue from "./right/User.vue";
+import LeftCollapserVue from "./left/LeftCollapser.vue";
+import LeftBreadcrumbVue from "./left/LeftBreadcrumb.vue";
+import RightUserVue from "./right/RightUser.vue";
 import FullScreenVue from "./right/FullScreen.vue";
-import NoticeVue from "./right/Notice.vue";
+import RightNoticeVue from "./right/RightNotice.vue";
 
-import SettingsVue from "./right/Settings.vue";
+import RightSettingsVue from "./right/RightSettings.vue";
 
 import { useAppStore } from "@/store/app";
 const appStore = useAppStore();
