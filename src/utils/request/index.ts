@@ -1,36 +1,41 @@
-import RequestSuper from "./request";
-
+import { useUserStore } from "@/store/user";
+import axios, { AxiosError } from "axios";
 import { ElMessage } from "element-plus";
 
-const isDev = process.env.NODE_ENV !== "production";
-
-const Request = new RequestSuper({
+const request_client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
-    timeout: 1000 * 60 * 5,
-    interceptors: {
-        // requestInterceptors: (config) => {
-        //   console.log("request:", config);
-        //   return config;
-        // },
-        requestInterceptorsCatch: (err) => {
-            if (isDev) console.log("request_err:", err);
+    timeout: 5000,
+});
 
-            return Promise.reject(err);
-        },
-        responseInterceptorsCatch: (err) => {
-            if (isDev) console.log("response_err:", err);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function requestErrorInterceptor(error: any) {
+    let errorMessage = "未知错误";
 
-            const res = err.response.data;
-            ElMessage({
-                showClose: true,
-                message: res.msg,
-                type: "error",
-            });
-            return Promise.reject(err);
-        },
-    },
-}); // 可能有需要导出Request的情况
+    if (error instanceof AxiosError) {
+        errorMessage = error.response?.data.msg || error.message;
+    } else if (error instanceof Error) {
+        errorMessage = error.message;
+    }
 
-const request = Request.instance;
+    ElMessage({
+        showClose: true,
+        message: errorMessage,
+        type: "error",
+    });
 
-export { request };
+    return Promise.reject(error);
+}
+
+request_client.interceptors.request.use((config) => {
+    const userStore = useUserStore();
+    config.headers.set("authorization", userStore.token);
+
+    return config;
+}, requestErrorInterceptor);
+
+request_client.interceptors.response.use((response) => {
+    // do something with response data
+    return response;
+}, requestErrorInterceptor);
+
+export { request_client };

@@ -15,13 +15,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { ElDrawer } from "element-plus";
 
 import SiderIndexVue from "../SiderIndex.vue";
 
 import { useAppStore } from "@/store/app";
 
 // 获取el-drawer的示例，后面需要调用el-drawer的handleClose方法
-const drawerRef = ref(null);
+const drawerRef = ref<InstanceType<typeof ElDrawer> | null>(null);
 
 const appStore = useAppStore();
 const showMenu = computed({
@@ -35,8 +36,7 @@ const route = useRoute();
 watch(
     () => route.path,
     () => {
-        // @ts-ignore
-        drawerRef.value.handleClose();
+        drawerRef.value?.handleClose();
         // 用于关闭 Drawer, 该方法会调用传入的 before-close 方法(为空)
     },
 );
