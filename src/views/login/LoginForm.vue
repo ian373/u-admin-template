@@ -25,8 +25,8 @@
         </el-form-item>
         <el-form-item>
             <el-button class="login-btn" type="primary" @click="login(loginFormRef)"
-                >登录</el-button
-            >
+                >登录
+            </el-button>
         </el-form-item>
     </el-form>
 </template>
@@ -34,18 +34,18 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 
-import type { FormRules, FormInstance } from "element-plus";
-import "element-plus/es/components/message/style/css";
+import type { FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
+import "element-plus/es/components/message/style/css";
 
 import { useRouter } from "vue-router";
 
 import { useUserStore } from "@/store/user";
 import { setUserRoutes } from "@/utils/routes/permission";
-
-import { request } from "@/utils/request";
-import { UserApi } from "@/api/user";
+import { type LoginResponse, UserApi } from "@/api/user";
 import { setToken } from "@/utils/user";
+import { Role } from "@/types/routes.ts";
+import { request_client } from "@/utils/request";
 
 const loginFormRef = ref<FormInstance>();
 
@@ -92,49 +92,34 @@ const login = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate((valid) => {
         if (valid) {
-            // ===============no-request: on================
-            if (import.meta.env.VITE_NO_REQUEST === "on") {
-                console.log("NO_REQUEST: ON");
-                const token = "UAdminTempToken";
-                userStore.setToken(token);
-                setToken(token);
-                userStore.setRole(0);
-                setUserRoutes(0);
-                ElMessage({
-                    showClose: true,
-                    message: "登录成功！",
-                    type: "success",
+            // console.log(request.defaults.headers);  (A)
+            // 发送用户名和密码，获取token和role
+            request_client
+                .post<LoginResponse>(UserApi.login, {
+                    userName: loginData.userName,
+                    pwd: loginData.pwd,
+                })
+                .then(({ data: { data } }) => {
+                    // 更新token，在@/utils/routes/permission中设置过一次
+                    userStore.token = data.token;
+                    setToken(data.token);
+                    const role = data.role as Role;
+                    userStore.role = role;
+                    setUserRoutes(role);
+                    ElMessage({
+                        showClose: true,
+                        message: "登录成功！",
+                        type: "success",
+                    });
+                    router.push("/dashboard");
+                })
+                .catch(() => {
+                    ElMessage({
+                        showClose: true,
+                        message: "登录失败！",
+                        type: "error",
+                    });
                 });
-                router.push("/dashboard");
-            } // =======================================
-            else {
-                // console.log(request.defaults.headers);  (A)
-
-                // 发送用户名和密码，获取token和role
-                request
-                    .post(UserApi.login, {
-                        userName: loginData.userName,
-                        pwd: loginData.pwd,
-                        remberMe: loginData.rememberMe,
-                    })
-                    .then((res: any) => {
-                        // 更新token，在@/utils/routes/permission中设置过一次
-                        (request.defaults.headers as any).authorization = "Bearer " + res.token;
-                        // console.log(request.defaults.headers); 这里的打印结果和(A)处的打印结果相同(新token)，不懂原因
-                        // 当然，此次post请求的authorization还是permissin.ts中设置的token
-                        userStore.setToken(res.token);
-                        setToken(res.token);
-                        userStore.setRole(res.role);
-                        setUserRoutes(res.role);
-                        ElMessage({
-                            showClose: true,
-                            message: "登录成功！",
-                            type: "success",
-                        });
-                        router.push("/dashboard");
-                    })
-                    .catch(() => {});
-            }
         } else {
             ElMessage({ showClose: true, message: "请完成表单!", type: "error" });
         }
@@ -149,9 +134,11 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .el-form {
     .option :deep(.el-form-item__content) {
         justify-content: space-between;
+
         .forget {
             &:hover {
                 cursor: pointer;
@@ -160,6 +147,7 @@ h1 {
             }
         }
     }
+
     .login-btn {
         width: 100%;
     }

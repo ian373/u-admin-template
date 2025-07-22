@@ -10,7 +10,14 @@
         :unique-opened="appStore.settings.uniqueMenueItem as boolean"
         :style="{ '--sider-open-width': appStore.settings.siderWidth + 'px' }"
     >
-        <MenuItemVue :menu-data="userStore.routes" />
+        <MenuItemVue
+            v-for="route in userStore.routes"
+            :is-top="true"
+            :show-icon="true"
+            :route="route"
+            :key="route.path"
+            :parent="null"
+        />
     </el-menu>
     <!-- mobile模式下的menu -->
     <el-menu
@@ -20,15 +27,22 @@
         :default-active="$route.path"
         :unique-opened="appStore.settings.uniqueMenueItem as boolean"
     >
-        <MenuItemVue :menu-data="userStore.routes" />
+        <MenuItemVue
+            v-for="route in userStore.routes"
+            :is-top="true"
+            :show-icon="true"
+            :route="route"
+            :key="route.path"
+            :parent="null"
+        />
     </el-menu>
 </template>
 
 <script setup lang="ts">
 import MenuItemVue from "./MenuItem.vue";
-
 import { useAppStore } from "@/store/app";
 import { useUserStore } from "@/store/user";
+
 const appStore = useAppStore();
 const userStore = useUserStore();
 </script>
@@ -52,10 +66,12 @@ const userStore = useUserStore();
     &.menu-box:not(.el-menu--collapse) {
         width: var(--sider-open-width);
     }
+
     // 菜单折叠时的样式
     &.menu-box.el-menu--collapse {
         // 折叠时菜单栏的宽度
         width: 56px;
+
         .el-tooltip__trigger {
             padding: 0 !important;
             // 菜单栏折叠的时候图标的padding-left

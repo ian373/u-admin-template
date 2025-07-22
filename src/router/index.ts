@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-
-import constantRoutes from "./routes/constRoutes";
 import { setupRouterGuard } from "./guard";
-
 import { getRouterBaseUrl } from "@/utils/routes/router_base_url";
 
-const baseUrl = getRouterBaseUrl();
+import constantRoutes from "./routes/constRoutes";
 
+const baseUrl = getRouterBaseUrl();
 const routes = constantRoutes;
 
 const router = createRouter({

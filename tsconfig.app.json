@@ -5,10 +5,18 @@
         "src/**/*",
         "src/**/*.vue"
     ],
+    "files": [
+        // 包含路由元信息类型定义
+        "src/router/routes/router-meta.d.ts"
+    ],
     "exclude": [
         "src/**/__tests__/*"
     ],
     "compilerOptions": {
+        "types": [
+            // 解决 unplugin-icons 导入路径ide显示找不到的问题
+            "unplugin-icons/types/vue"
+        ],
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
         "paths": {
             "@/*": [

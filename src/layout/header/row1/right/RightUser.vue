@@ -33,14 +33,16 @@
 import MaterialSymbolsLabProfileOutline from "~icons/material-symbols/lab-profile-outline";
 import MaterialSymbolsLockOutline from "~icons/material-symbols/lock-outline";
 import MaterialSymbolsLogoutRounded from "~icons/material-symbols/logout-rounded";
+import { TOKEN_KEY_NAME } from "@/utils/user.ts";
 
 const goProject = () => {
-    window.open("https://gitee.com/ian171/u-admin-template");
+    window.open("https://github.com/ian373/u-admin-template");
 };
 
 const logout = () => {
     if (confirm("是否登出？")) {
-        localStorage.removeItem("UAdminToken");
+        localStorage.removeItem(TOKEN_KEY_NAME);
+        // 这里使用刷新页面的方式来实现返回到登录页面，而不使用vue-router的push方法，主要是为了图方面，清空所有状态
         location.reload();
     }
 };

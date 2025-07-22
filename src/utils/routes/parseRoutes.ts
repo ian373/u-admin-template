@@ -1,36 +1,23 @@
 import { type RouteRecordRaw } from "vue-router";
+import { Role } from "@/types/routes.ts";
 
-function hasPermission(route: RouteRecordRaw, role: number) {
-    const meta = route.meta as any;
-    if (meta && meta.roles) {
-        if (meta.roles[0] === -1) {
-            if (meta.roles[1] >= role) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if ((meta.roles as number[]).includes(role)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+function hasPermission(route: RouteRecordRaw, role: Role) {
+    const meta = route.meta;
+    if (meta?.roles) {
+        return meta.roles.includes(role);
     } else {
         return true;
     }
 }
 
-export function filterAsyncRoutes(asyncRoutes: RouteRecordRaw[], role: number) {
+export function filterAsyncRoutes(asyncRoutes: RouteRecordRaw[], role: Role): RouteRecordRaw[] {
     const res = [];
 
-    for (let route of asyncRoutes) {
+    for (const route of asyncRoutes) {
         //防止原route对象被修改
         const temp = { ...route };
         if (hasPermission(temp, role)) {
-            // @ts-ignore
             if (temp.children) {
-                // @ts-ignore
                 temp.children = filterAsyncRoutes(temp.children, role);
             }
             res.push(temp);
