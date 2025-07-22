@@ -4,44 +4,42 @@ import { filterAsyncRoutes } from "@/utils/routes/parseRoutes";
 import roleRoutes from "@/router/routes/roleRoutes";
 import constRoutes from "@/router/routes/constRoutes";
 
-import { request } from "@/utils/request";
-import { UserApi } from "@/api/user";
+import { request_client } from "@/utils/request";
+import { UserApi, type UserInfoResponse } from "@/api/user";
 import { getToken, removeToken } from "@/utils/user";
+import { Role } from "@/types/routes.ts";
 
-export function setUserRoutes(role: number) {
+export function setUserRoutes(role: Role) {
     const userStore = useUserStore();
 
     const allRoutes = constRoutes;
     const routesList = filterAsyncRoutes(roleRoutes, role);
-    for (let route of routesList) {
+    for (const route of routesList) {
         allRoutes.push(route);
         router.addRoute(route);
     }
-    userStore.setRoutes(allRoutes);
+    userStore.routes = allRoutes;
 }
 
 export async function permissionHandle() {
     const userStore = useUserStore();
-
     const token = getToken();
     if (token) {
         try {
-            // ============no-request: on=========
-            if (import.meta.env.VITE_NO_REQUEST === "on") {
-                userStore.setRole(0);
-                userStore.setToken(token);
-                setUserRoutes(0);
-                return true;
-            }
-            // ======================
-            (request.defaults.headers as any).authorization = token;
-            const res = (await request.get(UserApi.getUserInfo)) as any;
-            userStore.setRole(res.role);
-            userStore.setToken(token);
-            setUserRoutes(res.role);
+            userStore.token = token;
+
+            // 真实的请求
+            userStore.token = token;
+            const {
+                data: { data },
+            } = await request_client.get<UserInfoResponse>(UserApi.getUserInfo);
+            // 默认后端数据和前端的role字符串能够对上，直接映射
+            userStore.role = data.role as Role;
+            setUserRoutes(userStore.role);
             return true;
         } catch {
             removeToken();
+            userStore.token = "";
             return false;
         }
     } else {

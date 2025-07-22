@@ -15,7 +15,7 @@
         <el-tabs v-model="activeName">
             <el-tab-pane class="t" label="消息(3)" name="message">
                 <div class="content-box">
-                    <div class="item" v-for="x of 3">
+                    <div class="item" v-for="x of 3" :key="x">
                         <!-- 如果要显示消息较复杂，可自行设计 div.item -->
                         <div class="text">消息{{ x }}</div>
                         <span>已读</span>

@@ -1,21 +1,11 @@
 import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";
+import type { Role } from "@/types/routes.ts";
 
 export const useUserStore = defineStore("user", {
     state: () => ({
         routes: [] as RouteRecordRaw[],
-        role: -1,
-        token: "",
+        role: null as Role | null,
+        token: null as string | null,
     }),
-    actions: {
-        setToken(token: string) {
-            this.token = token;
-        },
-        setRoutes(routes: RouteRecordRaw[]) {
-            this.routes = routes;
-        },
-        setRole(role: number) {
-            this.role = role;
-        },
-    },
 });

@@ -37,7 +37,7 @@ const currentPath = computed(() => route.path);
 
 const userStore = useUserStore();
 
-type ParseRoutesType = { path: string; title?: string; children?: any };
+type ParseRoutesType = { path: string; title?: string; children?: ParseRoutesType[] };
 type BreadCrumbType = {
     path: string;
     title: string;
@@ -48,11 +48,10 @@ type BreadCrumbType = {
 const breadcrumbList = ref([]) as Ref<BreadCrumbType[]>;
 
 function parseRoutes(routeList: RouteRecordRaw[], parentPath: null | string) {
-    const pathList = [] as any[];
+    const pathList = [];
 
     for (const route of routeList) {
-        // @ts-ignore
-        if (route.hidden) continue;
+        if (route.meta?.hidden) continue;
         const obj = {} as ParseRoutesType;
         if (parentPath) {
             if (parentPath === "/") {
@@ -64,9 +63,7 @@ function parseRoutes(routeList: RouteRecordRaw[], parentPath: null | string) {
             obj.path = route.path;
         }
         if (route.meta && route.meta.title) obj.title = route.meta.title as string;
-        // @ts-ignore
-        if (route.children as any) {
-            // @ts-ignore
+        if (route.children) {
             obj.children = parseRoutes(route.children, obj.path);
         }
         pathList.push(obj);
@@ -91,7 +88,7 @@ function getSiblingRoutes(pathList: string[], list: ParseRoutesType[]) {
     let curList = list;
     for (const p of pathList.slice(0, -1)) {
         target = getCh(p, curList);
-        curList = target.children;
+        curList = target.children || [];
     }
     // console.log(curList);
     return curList;
@@ -120,7 +117,7 @@ const setBreadcrumb = () => {
             const obj: BreadCrumbType = {
                 path: item.path,
                 title: item.meta.title as string,
-                haveSiblings: siblings.length > 1 ? true : false,
+                haveSiblings: siblings.length > 1,
             };
             if (siblings.length > 1) {
                 obj.siblings = siblings;

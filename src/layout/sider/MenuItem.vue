@@ -1,82 +1,56 @@
 <template>
-    <template v-for="item of props.menuData">
-        <template v-if="!item.hidden">
-            <!-- 一级菜单,只会在第一次生效(offset=undefined) -->
-            <el-menu-item
-                v-if="
-                    !props.offset &&
-                    item.children &&
-                    item.children.length === 1 &&
-                    !item.children[0].children
-                "
-                :class="props.offset ? '' : 'top-menu'"
-                :key="item.path"
-                :index="item.path === '/' ? '/dashboard' : item.path + '/' + item.children[0].path"
-            >
-                <div>
-                    <component :is="item.children[0].meta.icon" class="icon" />
+    <template v-if="!route.meta?.hidden">
+        <!-- 一级菜单 -->
+        <el-menu-item
+            v-if="isTop && route.children?.length === 1 && !route.children[0].children"
+            class="top-menu"
+            :index="route.path === '/' ? '/dashboard' : route.path + '/' + route.children[0].path"
+        >
+            <div>
+                <component :is="route.children[0].meta?.icon" class="icon" />
+            </div>
+            <template #title>
+                <div>{{ route.children[0].meta?.title }}</div>
+            </template>
+        </el-menu-item>
+        <!-- 多级菜单的最后一级菜单 -->
+        <el-menu-item v-else-if="!route.children" :index="parent + '/' + route.path">
+            <template #title>{{ route.meta?.title }}</template>
+        </el-menu-item>
+        <!-- 多级菜单 -->
+        <el-sub-menu
+            v-else
+            :class="isTop ? 'top-sub-menu' : 'deep-sub-menu'"
+            :index="parent ? props.parent + '/' + route.path : route.path"
+        >
+            <template #title>
+                <!-- 只在顶级菜单处才显示图表 -->
+                <div v-if="isTop">
+                    <component :is="route.meta?.icon" class="icon" />
                 </div>
-                <template #title>
-                    <div>{{ item.children[0].meta.title }}</div>
-                </template>
-            </el-menu-item>
-            <!-- 多级菜单的最后一级菜单 -->
-            <el-menu-item
-                v-if="!item.children"
-                :key="item.path"
-                :index="props.parent ? props.parent + '/' + item.path : item.path"
-            >
-                <template #title>{{ item.meta.title }}</template>
-            </el-menu-item>
-            <!-- 多级菜单 -->
-            <el-sub-menu
-                v-if="isSubmenu(item, props.offset)"
-                :class="props.offset ? 'deep-sub-menu' : 'top-sub-menu'"
-                :key="item.path"
-                :index="props.parent ? props.parent + '/' + item.path : item.path"
-            >
-                <template #title>
-                    <!-- 只在顶级菜单处才显示图表 -->
-                    <div>
-                        <component v-if="props.shhowIcon" :is="item.meta.icon" class="icon" />
-                    </div>
-                    <span>{{ item.meta.title }}</span>
-                </template>
+                <span>{{ route.meta?.title }}</span>
+            </template>
+            <template v-for="r in route.children" :key="r.path">
                 <MenuItem
-                    :shhow-icon="false"
-                    :offset="-1"
-                    :menu-data="item.children"
-                    :parent="props.parent ? props.parent + '/' + item.path : item.path"
+                    :route="r"
+                    :show-icon="false"
+                    :isTop="false"
+                    :parent="parent ? parent + '/' + route.path : route.path"
                 ></MenuItem>
-            </el-sub-menu>
-        </template>
+            </template>
+        </el-sub-menu>
     </template>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from "vue";
+import type { RouteRecordRaw } from "vue-router";
 
-const props = defineProps({
-    shhowIcon: {
-        type: Boolean,
-        default: true,
-    },
-    offset: Number, // Boolean(0)为false，其它数字为true
-    menuData: Object as PropType<any[]>,
-    parent: String,
-});
-
-// offset=> undfined | -1
-const isSubmenu = (item: any, offset: any) => {
-    if (!offset) {
-        if (item.children && item.children.length > 1) return true;
-        // 解决路由为s1-s2-s3-s4这种边际情况
-        if (item.children && item.children.length === 1 && item.children[0].children) return true;
-    } else {
-        if (item.children && item.children.length > 0) return true;
-    }
-    return false;
-};
+const props = defineProps<{
+    route: RouteRecordRaw;
+    showIcon: boolean;
+    isTop: boolean;
+    parent: string | null;
+}>();
 </script>
 
 <style scoped lang="scss">

@@ -20,13 +20,13 @@ export default [
     {
         path: "/login",
         name: "Login",
-        hidden: true, // hidden:true 表示不显示在SideMenu里
+        meta: { hidden: true },
         component: () => import("@/views/login/LoginIndex.vue"),
     },
     {
         path: "/:pathMatch(.*)*",
         name: "NotFound",
-        hidden: true,
+        meta: { hidden: true },
         component: () => import("@/views/notFound/NotFoundIndex.vue"),
     },
 ] as RouteRecordRaw[];
