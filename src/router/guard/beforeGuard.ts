@@ -31,7 +31,7 @@ export function createBeforeGuard(router: Router) {
         // 首次加载组件时启用loading动画,放在鉴权后面
         if (!appStore.visitedPaths.includes(to.path)) {
             appStore.addVisitedPath(to.path);
-            if (!appStore.mainLoading) {
+            if (!appStore.isMainLoading) {
                 appStore.toggleMainLoading();
             }
         }

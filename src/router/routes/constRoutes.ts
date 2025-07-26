@@ -1,4 +1,4 @@
-import LayoutIndexVue from "@/layout/LayoutIndex.vue";
+import LayoutIndex from "@/layout/LayoutIndex.vue";
 import { type RouteRecordRaw } from "vue-router";
 
 import MaterialSymbolsSpaceDashboard from "~icons/material-symbols/space-dashboard";
@@ -7,7 +7,7 @@ export default [
     {
         path: "/",
         redirect: "dashboard",
-        component: LayoutIndexVue,
+        component: LayoutIndex,
         children: [
             {
                 path: "dashboard",

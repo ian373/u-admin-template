@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { ref, type Ref } from "vue";
 import MaterialSymbolsAddAlertOutline from "~icons/material-symbols/add-alert-outline";
 
 const activeName = ref("message") as Ref<"message" | "notice" | "task">;
