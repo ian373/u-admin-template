@@ -3,11 +3,12 @@
         <!-- 文档：<Transition> 仅支持单个元素或组件作为其插槽内容。 -->
         <!-- 如果内容是一个组件，这个组件必须仅有一个根元素。 -->
         <transition name="fade-slide" mode="out-in" appear>
-            <!-- keepalive内部不能通过改变key来刷新组件，因为旧key的组件会被保存下来 -->
-            <keep-alive v-if="$route.meta.cache" :key="'cache' + appStore.pageKey">
-                <component :is="Component" />
-            </keep-alive>
-            <component v-else :is="Component" :key="'nocache' + appStore.pageKey" />
+            <!-- TODO keep alive不知道怎么实现 -->
+            <!-- <keep-alive v-if="$route.meta.cache" :key="'cache' + appStore.pageKey">-->
+            <!--   <component :is="Component" />-->
+            <!-- </keep-alive>-->
+            <!-- <component v-else :is="Component" :key="'nocache' + appStore.pageKey" />-->
+            <component :is="Component" :key="appStore.pageKey" />
         </transition>
     </router-view>
 </template>
