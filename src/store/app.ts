@@ -6,6 +6,7 @@ import { appSettings } from "@/settings/appSettings";
 
 export const useAppStore = defineStore("app", {
     state: () => ({
+        cachedComponents: [] as string[],
         menuCollapse: false,
         menuUniqueOpen: true,
         // 需要刷新router-view的时候，改变pageKey
@@ -27,6 +28,11 @@ export const useAppStore = defineStore("app", {
         },
     }),
     actions: {
+        addCachedComponent(name: string) {
+            if (!this.cachedComponents.includes(name)) {
+                this.cachedComponents.push(name);
+            }
+        },
         toggleMenuCollapse() {
             this.menuCollapse = !this.menuCollapse;
         },
