@@ -21,7 +21,7 @@ const goHome = () => {
 @use "./const.scss";
 .logo-box {
     position: relative;
-    height: 50px;
+    height: 44px;
     display: flex;
     align-items: center;
     background-color: const.$mBgColor;

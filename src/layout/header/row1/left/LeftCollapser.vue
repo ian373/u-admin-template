@@ -25,6 +25,9 @@ const clickHandle = () => {
 
 .box {
     .icon {
+        width: 24px;
+        height: 24px;
+
         &.expand {
             transform: rotate(180deg);
         }

@@ -9,7 +9,7 @@
                 :hidden="hiddenBadge"
                 :is-dot="true"
             >
-                <MaterialSymbolsAddAlertOutline class="icon" />
+                <AkarIconsBell class="icon" />
             </el-badge>
         </template>
         <el-tabs v-model="activeName">
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref, type Ref } from "vue";
-import MaterialSymbolsAddAlertOutline from "~icons/material-symbols/add-alert-outline";
+import AkarIconsBell from "~icons/akar-icons/bell";
 
 const activeName = ref("message") as Ref<"message" | "notice" | "task">;
 

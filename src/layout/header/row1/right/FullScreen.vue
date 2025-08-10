@@ -1,7 +1,7 @@
 <template>
     <div class="box" @click="fullScreenHandle">
-        <MaterialSymbolsFullscreenExit v-if="fullScreen" class="icon" />
-        <MaterialSymbolsFullscreen v-else class="icon" />
+        <AkarIconsNormalScreen v-if="fullScreen" class="icon" />
+        <AkarIconsFullScreen v-else class="icon" />
     </div>
 </template>
 
@@ -10,8 +10,8 @@ import { ref } from "vue";
 
 import { ElMessage } from "element-plus";
 import "element-plus/es/components/message/style/css";
-import MaterialSymbolsFullscreen from "~icons/material-symbols/fullscreen";
-import MaterialSymbolsFullscreenExit from "~icons/material-symbols/fullscreen-exit";
+import AkarIconsFullScreen from "~icons/akar-icons/full-screen";
+import AkarIconsNormalScreen from "~icons/akar-icons/normal-screen";
 
 const fullScreen = ref(false);
 
@@ -44,10 +44,4 @@ const fullScreenHandle = () => {
 @use "../../mixin.scss";
 
 @include mixin.box-style;
-.box {
-    .icon {
-        width: 16px;
-        height: 16px;
-    }
-}
 </style>

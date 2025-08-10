@@ -30,7 +30,7 @@ const appStore = useAppStore();
 .row1 {
     display: flex;
     justify-content: space-between;
-    height: 50px; // 和sider的logo高度对齐
+    height: 44px; // 和sider的logo高度对齐
     border-bottom: 1px solid #e4e4e4;
     .left,
     .right {

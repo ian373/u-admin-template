@@ -1,6 +1,6 @@
 <template>
     <div class="box" @click="clickHandle">
-        <MaterialSymbolsSettingsOutline class="icon" />
+        <SolarSettingsOutline class="icon" />
     </div>
     <!-- 通过size属性设置el-drawer的宽度 -->
     <el-drawer class="my-drawer" v-model="drawer" title="应用配置" :size="330">
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import SettingsDrawerVue from "./SettingsDrawer.vue";
-import MaterialSymbolsSettingsOutline from "~icons/material-symbols/settings-outline";
+import SolarSettingsOutline from "~icons/solar/settings-outline";
 
 import { ref } from "vue";
 
