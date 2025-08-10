@@ -24,7 +24,11 @@
             <span class="forget">忘记密码</span>
         </el-form-item>
         <el-form-item>
-            <el-button class="login-btn" type="primary" @click="login(loginFormRef)"
+            <el-button
+                class="login-btn"
+                type="primary"
+                :disabled="isDisableLogin"
+                @click="login(loginFormRef)"
                 >登录
             </el-button>
         </el-form-item>
@@ -37,9 +41,7 @@ import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import "element-plus/es/components/message/style/css";
-
 import { useRouter } from "vue-router";
-
 import { useUserStore } from "@/store/user";
 import { setUserRoutes } from "@/utils/routes/permission";
 import { type LoginResponse, UserApi } from "@/api/user";
@@ -54,6 +56,7 @@ const loginData = reactive({
     pwd: "12345678",
     rememberMe: false,
 });
+const isDisableLogin = ref(false);
 
 // 校验规则
 const rules = reactive<FormRules>({
@@ -92,6 +95,7 @@ const login = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate((valid) => {
         if (valid) {
+            isDisableLogin.value = true;
             // console.log(request.defaults.headers);  (A)
             // 发送用户名和密码，获取token和role
             request_client
@@ -119,6 +123,7 @@ const login = (formEl: FormInstance | undefined) => {
                         message: "登录失败！",
                         type: "error",
                     });
+                    isDisableLogin.value = false;
                 });
         } else {
             ElMessage({ showClose: true, message: "请完成表单!", type: "error" });
