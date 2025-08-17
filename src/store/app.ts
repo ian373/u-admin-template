@@ -6,14 +6,13 @@ import { appSettings } from "@/settings/appSettings";
 
 export const useAppStore = defineStore("app", {
     state: () => ({
+        cachedComponents: [] as string[],
         menuCollapse: false,
         menuUniqueOpen: true,
-        // 需要刷新router-view的时候，改变mainReloadKey
-        mainReloadKey: 0,
-        // 用于keepalive组件的刷新
-        mainReloadKP: 0,
+        // 需要刷新router-view的时候，改变pageKey
+        pageKey: 0,
         // 控制main区域的Loading动画
-        mainLoading: false,
+        isMainLoading: false,
         visitedPaths: [] as string[],
         expandMain: false,
         // 当浏览器视口宽度小于一定值时，使用mobile模式
@@ -29,20 +28,22 @@ export const useAppStore = defineStore("app", {
         },
     }),
     actions: {
+        addCachedComponent(name: string) {
+            if (!this.cachedComponents.includes(name)) {
+                this.cachedComponents.push(name);
+            }
+        },
         toggleMenuCollapse() {
             this.menuCollapse = !this.menuCollapse;
         },
         toggleMainLoading() {
-            this.mainLoading = !this.mainLoading;
+            this.isMainLoading = !this.isMainLoading;
         },
-        increaseMainKP() {
-            this.mainReloadKP++;
+        incrementPageKey() {
+            this.pageKey++;
         },
         addVisitedPath(path: string) {
             this.visitedPaths.push(path);
-        },
-        increaseMainKey() {
-            this.mainReloadKey++;
         },
         setSettingsItem(key: SettingsKeyType, val: boolean | number) {
             this.settings[key] = val;

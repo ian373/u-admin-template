@@ -5,8 +5,8 @@
                 class="dashboard-tag"
                 @click="goHome"
                 :effect="$route.path === '/dashboard' ? 'dark' : 'plain'"
-                >首页</el-tag
-            >
+                >首页
+            </el-tag>
             <el-tag
                 class="render-tags"
                 closable
@@ -24,8 +24,7 @@
 <script setup lang="ts">
 import { watch, onBeforeUnmount, ref, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
-
-import { TagType } from "@/types/tagBox";
+import { type TagType } from "@/types/tagBox";
 import { useTagBoxStore } from "@/store/tagBox";
 import { ElScrollbar } from "element-plus";
 
@@ -63,6 +62,7 @@ function getMoveLength() {
     // console.log(window.getComputedStyle(tagBoxRef.value).width);
     // console.log("width: ", window.getComputedStyle(lastEl).width);
 }
+
 watch(router.currentRoute, () => {
     const isAddNewTag = tagBoxStore.addTag({
         name: route.meta.title as string,
@@ -120,20 +120,25 @@ onBeforeUnmount(() => {
 .render-tags {
     cursor: pointer;
 }
+
 .el-scrollbar {
     width: 100%;
     margin-left: 8px;
+
     :deep(.el-scrollbar__view) {
         height: 100%;
     }
+
     :deep(.el-scrollbar__thumb) {
         // 把滚动条的位置下移2px，滚动条的父容器似乎设置了overflow:hidden,再往下移就要看不到了
         margin-top: 2px;
     }
+
     .tag-box {
         height: 100%;
         display: flex;
         align-items: center;
+
         .render-tags {
             margin-left: 5px;
         }

@@ -2,56 +2,81 @@
     <router-view v-slot="{ Component }">
         <!-- 文档：<Transition> 仅支持单个元素或组件作为其插槽内容。 -->
         <!-- 如果内容是一个组件，这个组件必须仅有一个根元素。 -->
-        <transition name="fade">
-            <!-- keepalive内部不能通过改变key来刷新组件，因为旧key的组件会被保存下来 -->
-            <keep-alive v-if="$route.meta.cache" :key="appStore.mainReloadKP">
-                <component :is="Component" />
+        <transition name="fade-slide" mode="out-in" appear>
+            <keep-alive :max="10" :include="appStore.cachedComponents">
+                <component :is="Component" :key="appStore.pageKey" />
             </keep-alive>
-            <component v-else :is="Component" :key="appStore.mainReloadKey" />
         </transition>
     </router-view>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
+import { watch } from "vue";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const appStore = useAppStore();
+watch(
+    () => route.fullPath,
+    () => {
+        // 如果路由配置了meta.cache，则将组件名加入缓存列表
+        if (route.meta.cache) {
+            // 获取当前路由对应的组件
+            const comp = route.matched.slice(-1)[0]?.components?.default;
+            // console.log(comp);
+            /*
+            组件的名称，有下面几种情况：
+            1. 如果.vue文件中显示有设置name属性，会有name字段；
+            ```vue
+            <script setup lang="ts">
+            defineOptions({
+                name: "ComponentName",
+            });
+            ```
+            comp.name为"ComponentName"
+
+            2. 如果.vue文件没有显示设置name属性，但是.vue文件存在<script setup>，会有__name字段；但是不知道依赖__name的稳定性如何
+             */
+            // @ts-expect-error comp.__name不存在类型声明中
+            const compName = comp?.name || comp?.__name || null;
+            if (compName) {
+                appStore.addCachedComponent(compName);
+            }
+        }
+    },
+    { immediate: true },
+);
 </script>
 
 <style scoped lang="scss">
 // 路由切换动画
-.fade-enter-from {
-    transform: translate(-20px);
-    opacity: 0;
-}
+.fade-slide {
+    &-enter-active,
+    &-leave-active {
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
 
-.fade-enter-active {
-    // 需要在该组件的父容器上设置position: relative;
-    position: absolute;
-    // BUG:不管使用下面的方法还是注释的方法，首次切换要加载的组件都会有闪动现象
-    // 延迟0.3秒，等上一个元素执行完动画后再执行
-    transition:
-        transform 0.3s ease-out 0.3s,
-        opacity 0.3s ease-out 0.3s;
-    // 可以使用<transition name="fade" mode="out-in">然后上面就不需要设置延迟了
-    // 但是实际使用发现会出现闪动，还是暂用这种方法
-}
-.fade-enter-to {
-    transform: translate(0);
-    opacity: 1;
-}
-.fade-leave-from {
-    transform: translate(0);
-    opacity: 1;
-}
-.fade-leave-active {
-    position: absolute;
-    transition:
-        transform 0.3s ease-in,
-        opacity 0.3s ease-in;
-}
-.fade-leave-to {
-    opacity: 0;
-    transform: translate(20px);
+    &-enter-from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    &-enter-to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &-leave-from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &-leave-to {
+        transform: translateX(20px);
+        opacity: 0;
+    }
 }
 </style>

@@ -4,14 +4,14 @@
             <el-divider>界面设置</el-divider>
             <my-switch-vue v-model="uniqueMenuItem">菜单栏手风琴模式</my-switch-vue>
             <input-number-vue v-model="siderWidth" :min-num="200" :max-num="280" :step="5"
-                >菜单栏宽度</input-number-vue
-            >
+                >菜单栏宽度
+            </input-number-vue>
             <el-divider>显示设置</el-divider>
             <!-- 多个inputnum或myswitch组件，出现了外边距折叠的问题，但影响不大 -->
             <my-switch-vue v-model="showLogo">Logo</my-switch-vue>
             <my-switch-vue v-model="showBreadcrumb" :disabled="appStore.isMobile"
-                >面包屑</my-switch-vue
-            >
+                >面包屑
+            </my-switch-vue>
             <my-switch-vue v-model="showTageSection">标签栏</my-switch-vue>
         </div>
         <el-divider></el-divider>
@@ -24,8 +24,7 @@
 <script setup lang="ts">
 import MySwitchVue from "#/appDrawer/MySwitch.vue";
 import InputNumberVue from "#/appDrawer/InputNumber.vue";
-
-import { computed, ComputedRef } from "vue";
+import { computed, type ComputedRef } from "vue";
 import { useAppStore } from "@/store/app";
 
 const appStore = useAppStore();

@@ -6,7 +6,7 @@ export function createAfterGuard(router: Router) {
     router.afterEach(() => {
         const appStore = useAppStore();
 
-        if (appStore.mainLoading) {
+        if (appStore.isMainLoading) {
             appStore.toggleMainLoading();
         }
     });

@@ -1,16 +1,13 @@
 <template>
-    <div class="logo-box" :class="appStore.menuCollapse ? 'collapse' : ''" @click="goHome">
+    <div class="logo-box" @click="goHome">
         <img src="@/assets/logo.png" alt="" />
-        <span v-show="!appStore.menuCollapse">UAdminTemp</span>
+        <span>UAdminTemp</span>
     </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 
-import { useAppStore } from "@/store/app";
-
-const appStore = useAppStore();
 const router = useRouter();
 
 const goHome = () => {
@@ -23,33 +20,27 @@ const goHome = () => {
 <style scoped lang="scss">
 @use "./const.scss";
 .logo-box {
-    // width不能设为100%或auto，不然transition效果异常
-    // 宽度设为最小侧边栏宽度200px
-    width: 200px;
-    height: 50px;
+    position: relative;
+    height: 44px;
     display: flex;
     align-items: center;
     background-color: const.$mBgColor;
     cursor: pointer;
     overflow: hidden;
-    //动画函数和elment的动画函数不一样，不能完全拟合
-    transition: width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    padding-left: var(--el-menu-base-level-padding);
 
-    padding-left: 12px;
     img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
     }
+
     span {
-        padding-left: 5px;
-        transition: all 0.3s ease;
+        position: absolute;
+        left: 64px;
         color: #fff;
         font-size: 16px;
         font-weight: 700;
     }
-}
-.logo-box.collapse {
-    width: 56px;
 }
 </style>

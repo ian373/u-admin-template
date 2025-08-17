@@ -55,17 +55,16 @@ export default [
             {
                 path: "submenu",
                 redirect: "/routeslevel3/submenu/sub2",
-                component: () => import("@/views/nested/NestedPage4.vue"),
                 meta: { title: "三级菜单" },
                 children: [
                     {
                         path: "sub2",
-                        component: () => import("@/views/nested/NestedPage5.vue"),
+                        component: () => import("@/views/nested/NestedPage4.vue"),
                         meta: { title: "页面2" },
                     },
                     {
                         path: "sub3",
-                        component: () => import("@/views/nested/NestedPage6.vue"),
+                        component: () => import("@/views/nested/NestedPage5.vue"),
                         meta: { title: "页面3" },
                     },
                 ],

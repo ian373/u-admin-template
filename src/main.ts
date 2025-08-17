@@ -1,9 +1,9 @@
 import { createApp } from "vue";
-import App from "./App.vue";
 import { createPinia } from "pinia";
-
+import App from "./App.vue";
 import router from "@/router/index";
-import "@/styles/reset.css";
+
+import "normalize.css";
 
 const app = createApp(App);
 

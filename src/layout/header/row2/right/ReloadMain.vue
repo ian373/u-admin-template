@@ -6,17 +6,11 @@
 
 <script setup lang="ts">
 import { useAppStore } from "@/store/app";
-import { useRoute } from "vue-router";
 import MaterialSymbolsAutorenew from "~icons/material-symbols/autorenew";
 
 const appStore = useAppStore();
-const route = useRoute();
 const clickHandle = () => {
-    if (route.meta.cache) {
-        appStore.increaseMainKP();
-    } else {
-        appStore.increaseMainKey();
-    }
+    appStore.incrementPageKey();
 };
 </script>
 

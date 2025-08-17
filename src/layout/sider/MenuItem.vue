@@ -6,16 +6,16 @@
             class="top-menu"
             :index="route.path === '/' ? '/dashboard' : route.path + '/' + route.children[0].path"
         >
-            <div>
+            <div class="icon-box">
                 <component :is="route.children[0].meta?.icon" class="icon" />
             </div>
             <template #title>
-                <div>{{ route.children[0].meta?.title }}</div>
+                <span>{{ route.children[0].meta?.title }}</span>
             </template>
         </el-menu-item>
         <!-- 多级菜单的最后一级菜单 -->
         <el-menu-item v-else-if="!route.children" :index="parent + '/' + route.path">
-            <template #title>{{ route.meta?.title }}</template>
+            <template #title> {{ route.meta?.title }}</template>
         </el-menu-item>
         <!-- 多级菜单 -->
         <el-sub-menu
@@ -25,7 +25,7 @@
         >
             <template #title>
                 <!-- 只在顶级菜单处才显示图表 -->
-                <div v-if="isTop">
+                <div v-if="isTop" class="icon-box">
                     <component :is="route.meta?.icon" class="icon" />
                 </div>
                 <span>{{ route.meta?.title }}</span>
@@ -61,8 +61,6 @@ const props = defineProps<{
     background-color: const.$mItemBgColor;
 
     &.top-menu {
-        padding-right: 0;
-        padding-left: const.$iconRight !important;
         //顶级一级菜单的背景颜色，要和menu的背景颜色一样
         background-color: const.$mBgColor;
     }
@@ -83,10 +81,6 @@ const props = defineProps<{
 
     &.top-sub-menu {
         background-color: const.$mBgColor;
-
-        > :deep(.el-sub-menu__title) {
-            padding-left: const.$iconRight !important;
-        }
     }
 
     > :deep(.el-sub-menu__title) {
@@ -99,9 +93,15 @@ const props = defineProps<{
     }
 }
 
-.icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 15px;
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+
+    .icon {
+        width: 24px;
+        height: 24px;
+    }
 }
 </style>
